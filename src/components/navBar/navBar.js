@@ -1,23 +1,23 @@
-
+import style from "./navBar.module.css";
 
 export const NavBar = () => {
     return (
-        <nav className={"nav"}>
-            <div>
-                <a href="..">Profile</a>
+        <nav className={style.nav}>
+            <div className={`${style.item} ${style.active}`}>
+                Profile
             </div>
-            <div>
-                <a href="..">Messages</a>
+            <div className={style.item}>
+                Messages
             </div>
-            <div>
-                <a href="..">News</a>
+            <div className={style.item}>
+                News
             </div>
-            <div>
-                <a href="..">Music</a>
+            <div className={style.item}>
+                Music
             </div>
-            <div>
-                <a href="..">Settings</a>
+            <div className={style.item}>
+                Settings
             </div>
         </nav>
-    )
-}
+    );
+};

@@ -1,0 +1,12 @@
+.nav {
+    grid-area: navBar;
+    background-color: burlywood;
+}
+
+.item {
+    color: white;
+}
+
+.item.active {
+    color: gold;
+}
