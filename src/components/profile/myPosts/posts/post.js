@@ -6,7 +6,8 @@ export const Post = (props) => {
             <img src="https://comicvine1.cbsistatic.com/uploads/scale_small/11138/111385676/7212562-5667359844-41703.jpg" alt="avatar"/>
             {props.message}
             <div>
-                <span>like</span>
+                <span>like: </span>
+                <span>{props.likeCount}</span>
             </div>
         </div>
     );
