@@ -1,17 +1,23 @@
 import style from "./myPosts.module.css";
 import {Post} from "./posts/post";
 
-export const MyPosts = () => {
+export const MyPosts = ({dataPosts}) => {
+
     return (
-        <div>
-            My Posts
+        <div className={style.postsBlock}>
+            <h3>My Posts</h3>
             <div>
-                <textarea/>
-                <button>Add post</button>
+                <div>
+                    <textarea/>
+                </div>
+                <div>
+                    <button>Add post</button>
+                </div>
             </div>
-            <div>
-                <Post message={"Hi, how are you?"} likeCount={10}/>
-                <Post message={"It's my first post"} likeCount={15}/>
+            <div className={style.posts}>
+                {
+                    dataPosts.map(elem => <Post message={elem.text} likeCount={elem.likesCount}/>)
+                }
             </div>
         </div>
     );

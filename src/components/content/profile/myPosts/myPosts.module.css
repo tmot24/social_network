@@ -1,12 +1,6 @@
-.content {
-    grid-area: c;
-    background-color: cornflowerblue;
+.postsBlock {
+    padding: 10px;
 }
-
-.content img {
-    width: 100%;
-}
-
-.item {
-    color: green;
+.posts {
+    margin-top: 10px;
 }

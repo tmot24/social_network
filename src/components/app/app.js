@@ -8,15 +8,15 @@ import {News} from "../content/news/news";
 import {Music} from "../content/music/music";
 import {Settings} from "../content/settings/settings";
 
-export const App = () => {
+export const App = ({dataPosts, dataDialog, dataMessage}) => {
     return (
         <BrowserRouter>
             <div className={"app-wrapper"}>
                 <Header/>
                 <NavBar/>
                 <div className={"app-wrapper-content"}>
-                    <Route path={"/profile"} component={Profile}/>
-                    <Route path={"/messages"} component={Dialogs}/>
+                    <Route path={"/profile"} render={() => <Profile dataPosts={dataPosts}/>}/>
+                    <Route path={"/dialogs"} exact render={() => <Dialogs dataDialog={dataDialog} dataMessage={dataMessage}/>}/>
                     <Route path={"/news"} component={News}/>
                     <Route path={"/music"} component={Music}/>
                     <Route path={"/settings"} component={Settings}/>
