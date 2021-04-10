@@ -2,19 +2,19 @@ import style from "./dialogs.module.css";
 import {DialogItem} from "./dialogItem/dialogsItem";
 import {Message} from "./message/message";
 
-export const Dialogs = ({dataDialog, dataMessage}) => {
+export const Dialogs = ({dialogsPage}) => {
 
     return (
         <div className={style.dialogs}>
             <div className={style.dialogsItems}>
                 {
-                    dataDialog.map(elem => <DialogItem name={elem.name} id={elem.id}/>)
+                    dialogsPage.dataDialog.map(elem => <DialogItem key={elem.id} name={elem.name} id={elem.id}/>)
                 }
             </div>
             <div className={style.messages}>
                 <div className={style.messages}>
                     {
-                        dataMessage.map(elem => <Message message={elem.text}/>)
+                        dialogsPage.dataMessage.map(elem => <Message key={elem.id} message={elem.text}/>)
                     }
                 </div>
             </div>

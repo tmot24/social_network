@@ -2,12 +2,11 @@ import style from "./profile.module.css";
 import {MyPosts} from "./myPosts/myPosts";
 import {ProfileInfo} from "./profileInfo/profileInfo";
 
-export const Profile = ({dataPosts}) => {
-
+export const Profile = ({profilePage}) => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts dataPosts={dataPosts}/>
+            <MyPosts dataPosts={profilePage.dataPosts}/>
         </div>
     );
 };

@@ -16,7 +16,7 @@ export const MyPosts = ({dataPosts}) => {
             </div>
             <div className={style.posts}>
                 {
-                    dataPosts.map(elem => <Post message={elem.text} likeCount={elem.likesCount}/>)
+                    dataPosts.map(elem => <Post key={elem.id} message={elem.text} likeCount={elem.likesCount}/>)
                 }
             </div>
         </div>
