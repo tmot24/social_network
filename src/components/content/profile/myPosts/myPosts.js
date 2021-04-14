@@ -1,7 +1,9 @@
 import style from "./myPosts.module.css";
 import {Post} from "./posts/post";
 
-export const MyPosts = ({dataPosts}) => {
+export const MyPosts = ({posts, newPostText}) => {
+
+    const addPost = () => alert("Hey");
 
     return (
         <div className={style.postsBlock}>
@@ -11,12 +13,12 @@ export const MyPosts = ({dataPosts}) => {
                     <textarea/>
                 </div>
                 <div>
-                    <button>Add post</button>
+                    <button onClick={addPost}>Add post</button>
                 </div>
             </div>
             <div className={style.posts}>
                 {
-                    dataPosts.map(elem => <Post key={elem.id} message={elem.text} likeCount={elem.likesCount}/>)
+                    posts.map(elem => <Post key={elem.id} message={elem.message} likesCount={elem.likesCount}/>)
                 }
             </div>
         </div>

@@ -1,12 +1,11 @@
-import style from "./profile.module.css";
-import {MyPosts} from "./myPosts/myPosts";
 import {ProfileInfo} from "./profileInfo/profileInfo";
+import {MyPostsContainer} from "./myPosts/my-posts-container";
 
-export const Profile = ({profilePage}) => {
+export const Profile = () => {
     return (
         <div>
             <ProfileInfo/>
-            <MyPosts dataPosts={profilePage.dataPosts}/>
+            <MyPostsContainer/>
         </div>
     );
 };
