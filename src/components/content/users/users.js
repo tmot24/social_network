@@ -1,61 +1,47 @@
 import styles from "./users.module.css";
+import axios from "axios";
+import {useState} from "react";
 
 const randomImage = "https://source.unsplash.com/random";
 
-export const Users = (props) => {
+export const Users = ({users, followUnfollow, setUsers}) => {
+    // const [users, setUsersToState] = useState()
 
-    if (props.users.length === 0) {
-        props.setUsers([{
-                id: 1,
-                followed: false,
-                fullName: "Dmitriy",
-                status: "I'm a boss",
-                location: {city: "Minsk", country: "Belarus"},
-                photoUrl: randomImage,
-            },
-                {
-                    id: 2,
-                    followed: true,
-                    fullName: "Sasha",
-                    status: "I'm a boss too",
-                    location: {city: "Moscow", country: "Russia"},
-                    photoUrl: randomImage,
-                },
-                {
-                    id: 3,
-                    followed: false,
-                    fullName: "Andrew",
-                    status: "I'm a boss too",
-                    location: {city: "Kiev", country: "Ukraine"},
-                    photoUrl: randomImage,
-                },
-            ]
-        );
+    const getUsers = () => {
+        if (users.length === 0) {
+            axios.get("https://social-network.samuraijs.com/api/1.0/users")
+                .then(response => {
+                    setUsers(response.data.items);
+                });
+        }
     }
 
     return (
         <div>
+            <button onClick={getUsers}>Get Users</button>
             {
-                props.users.map(u =>
+                users.map(u =>
                     <div key={u.id}>
                         <span>
                             <div>
-                                <img src={u.photoUrl} className={styles.userPhoto} alt={"img"}/>
+                                <img src={u.photos.small ? u.photos.small : randomImage}
+                                     className={styles.userPhoto}
+                                     alt={"img"}/>
                             </div>
                             <div>
-                                <button onClick={() => props.followUnfollow(u.id)}>
+                                <button onClick={() => followUnfollow(u.id)}>
                                     {u.followed ? "Unfollow" : "Follow"}
                                 </button>
                             </div>
                         </span>
                         <span>
                             <span>
-                                <div>{u.fullName}</div>
+                                <div>{u.name}</div>
                                 <div>{u.status}</div>
                             </span>
                             <span>
-                                <div>{u.location.country}</div>
-                                <div>{u.location.city}</div>
+                                <div>{"u.location.country"}</div>
+                                <div>{"u.location.city"}</div>
                             </span>
                         </span>
                     </div>)
