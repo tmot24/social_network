@@ -1,35 +1,6 @@
 import styles from "./users.module.css";
-import axios from "axios";
-import {useEffect, useState} from "react";
 
-const randomImage = "https://source.unsplash.com/random";
-
-export const Users = ({
-                          users,
-                          followUnfollow,
-                          setUsers,
-                          pageSize,
-                          totalUsersCount,
-                          currentPage,
-                          setCurrentPage,
-                          setTotalUsersCount
-                      }) => {
-    const [usersState, setUsersToState] = useState(users);
-
-    useEffect(() => {
-        axios.get("https://social-network.samuraijs.com/api/1.0/users")
-            .then(response => {
-                setTotalUsersCount(response.data.totalCount);
-            });
-    }, [setTotalUsersCount]);
-
-    useEffect(() => {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`)
-            .then(response => {
-                setUsersToState(response.data.items);
-                setUsers(response.data.items);
-            });
-    }, [currentPage, pageSize, setTotalUsersCount, setUsers]);
+export const Users = ({totalUsersCount, pageSize, currentPage, onPageChanged, isFollow, users}) => {
 
     const pagesCount = Math.ceil(totalUsersCount / pageSize);
 
@@ -41,22 +12,22 @@ export const Users = ({
                 {
                     pages.map(p =>
                         <button key={p} className={currentPage === p ? styles.selectedPage : null}
-                                onClick={() => setCurrentPage(p)}
+                                onClick={() => onPageChanged(p)}
                         >{p}</button>
                     )
                 }
             </div>
             {
-                usersState.map(u =>
+                users.map(u =>
                     <div key={u.id}>
                         <span>
                             <div>
-                                <img src={u.photos.small ? u.photos.small : randomImage}
+                                <img src={u.photos.small ? u.photos.small : "https://source.unsplash.com/random"}
                                      className={styles.userPhoto}
                                      alt={"img"}/>
                             </div>
                             <div>
-                                <button onClick={() => followUnfollow(u.id)}>
+                                <button onClick={() => isFollow(u.id)}>
                                     {u.followed ? "Unfollow" : "Follow"}
                                 </button>
                             </div>

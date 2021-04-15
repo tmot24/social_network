@@ -7,7 +7,7 @@ import {News} from "../content/news/news";
 import {Music} from "../content/music/music";
 import {Settings} from "../content/settings/settings";
 import {DialogsContainer} from "../content/dialogs/dialogs-container";
-import {UsersContainer} from "../content/users/users-container";
+import {UsersContainer} from "../content/users/usersContainer";
 
 export const App = () => {
     return (
