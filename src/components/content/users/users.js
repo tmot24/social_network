@@ -1,26 +1,53 @@
 import styles from "./users.module.css";
 import axios from "axios";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
 const randomImage = "https://source.unsplash.com/random";
 
-export const Users = ({users, followUnfollow, setUsers}) => {
-    // const [users, setUsersToState] = useState()
+export const Users = ({
+                          users,
+                          followUnfollow,
+                          setUsers,
+                          pageSize,
+                          totalUsersCount,
+                          currentPage,
+                          setCurrentPage,
+                          setTotalUsersCount
+                      }) => {
+    const [usersState, setUsersToState] = useState(users);
 
-    const getUsers = () => {
-        if (users.length === 0) {
-            axios.get("https://social-network.samuraijs.com/api/1.0/users")
-                .then(response => {
-                    setUsers(response.data.items);
-                });
-        }
-    }
+    useEffect(() => {
+        axios.get("https://social-network.samuraijs.com/api/1.0/users")
+            .then(response => {
+                setTotalUsersCount(response.data.totalCount);
+            });
+    }, [setTotalUsersCount]);
+
+    useEffect(() => {
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`)
+            .then(response => {
+                setUsersToState(response.data.items);
+                setUsers(response.data.items);
+            });
+    }, [currentPage, pageSize, setTotalUsersCount, setUsers]);
+
+    const pagesCount = Math.ceil(totalUsersCount / pageSize);
+
+    const pages = Array.from({length: pagesCount}, (_, k) => k + 1);
 
     return (
         <div>
-            <button onClick={getUsers}>Get Users</button>
+            <div>
+                {
+                    pages.map(p =>
+                        <button key={p} className={currentPage === p ? styles.selectedPage : null}
+                                onClick={() => setCurrentPage(p)}
+                        >{p}</button>
+                    )
+                }
+            </div>
             {
-                users.map(u =>
+                usersState.map(u =>
                     <div key={u.id}>
                         <span>
                             <div>
@@ -44,7 +71,8 @@ export const Users = ({users, followUnfollow, setUsers}) => {
                                 <div>{"u.location.city"}</div>
                             </span>
                         </span>
-                    </div>)
+                    </div>
+                )
             }
         </div>
     );
