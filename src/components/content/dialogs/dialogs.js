@@ -5,7 +5,7 @@ import {Message} from "./message/message";
 export const Dialogs = ({dialogsPage}) => {
 
     const addMessage = () => alert("message");
-    debugger
+
     return (
         <div className={style.dialogs}>
             <div className={style.dialogsItems}>

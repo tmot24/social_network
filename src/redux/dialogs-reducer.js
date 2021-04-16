@@ -1,16 +1,16 @@
+import avatar from "../assets/images/default_avatar.jpg"
+
 const UPDATE_NEW_POST_BODY = "UPDATE_NEW_POST_BODY";
 const SEND_MESSAGE = "SEND_MESSAGE";
 
-
-const randomImage = "https://source.unsplash.com/random";
 const initialState = {
     dataDialog: [
-        {id: 1, name: "Dimych", img: randomImage},
-        {id: 2, name: "Andrey", img: randomImage},
-        {id: 3, name: "Sveta", img: randomImage},
-        {id: 4, name: "Sasha", img: randomImage},
-        {id: 5, name: "Victor", img: randomImage},
-        {id: 6, name: "Valera", img: randomImage},
+        {id: 1, name: "Dimych", img: avatar},
+        {id: 2, name: "Andrey", img: avatar},
+        {id: 3, name: "Sveta", img: avatar},
+        {id: 4, name: "Sasha", img: avatar},
+        {id: 5, name: "Victor", img: avatar},
+        {id: 6, name: "Valera", img: avatar},
     ],
     messages: [
         {id: 1, message: "Hi"},

@@ -9,6 +9,8 @@ const reducers = combineReducers({
     dialogsPage: dialogsReducer,
     sidebar: sidebarReducer,
     usersPage: usersReducer,
-})
+});
 
 export const store = createStore(reducers);
+
+window.store = store;

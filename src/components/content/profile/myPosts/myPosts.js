@@ -1,7 +1,7 @@
 import style from "./myPosts.module.css";
 import {Post} from "./posts/post";
 
-export const MyPosts = ({posts, newPostText}) => {
+export const MyPosts = ({posts}) => {
 
     const addPost = () => alert("Hey");
 

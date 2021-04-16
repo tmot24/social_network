@@ -1,6 +1,13 @@
 import style from "./profileInfo.module.css"
+import {Preloader} from "../../common/preloader/preloader";
 
-export const ProfileInfo = () => {
+export const ProfileInfo = ({profile}) => {
+    if (!profile) {
+        return (
+            <Preloader/>
+        )
+    }
+
     return (
         <div>
             <div>
@@ -9,6 +16,7 @@ export const ProfileInfo = () => {
                      alt="img"/>
             </div>
             <div className={style.descriptionBlock}>
+                <img src={profile.photos.large} alt="img"/>
                 ava + desc
             </div>
         </div>

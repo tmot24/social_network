@@ -1,4 +1,6 @@
 import styles from "./users.module.css";
+import {NavLink} from "react-router-dom";
+import avatar from "../../../assets/images/default_avatar.jpg"
 
 export const Users = ({totalUsersCount, pageSize, currentPage, onPageChanged, isFollow, users}) => {
 
@@ -22,9 +24,11 @@ export const Users = ({totalUsersCount, pageSize, currentPage, onPageChanged, is
                     <div key={u.id}>
                         <span>
                             <div>
-                                <img src={u.photos.small ? u.photos.small : "https://source.unsplash.com/random"}
-                                     className={styles.userPhoto}
-                                     alt={"img"}/>
+                                <NavLink to={`/profile/${u.id}`}>
+                                    <img src={u.photos.small ? u.photos.small : avatar}
+                                         className={styles.userPhoto}
+                                         alt={"img"}/>
+                                </NavLink>
                             </div>
                             <div>
                                 <button onClick={() => isFollow(u.id)}>
