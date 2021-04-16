@@ -1,5 +1,4 @@
 import "./app.css";
-import {Header} from "../header/header";
 import {NavBar} from "../navBar/navBar";
 import {BrowserRouter, Route} from "react-router-dom";
 import {News} from "../content/news/news";
@@ -8,12 +7,13 @@ import {Settings} from "../content/settings/settings";
 import DialogsContainer from "../content/dialogs/dialogs-container";
 import UsersContainer from "../content/users/usersContainer";
 import ProfileContainer from "../content/profile/profileContainer";
+import HeaderContainer from "../header/headerContainer";
 
 export const App = () => {
     return (
         <BrowserRouter>
             <div className={"app-wrapper"}>
-                <Header/>
+                <HeaderContainer/>
                 <NavBar/>
                 <div className={"app-wrapper-content"}>
                     <Route path={"/profile/:userId?"} component={ProfileContainer}/>
