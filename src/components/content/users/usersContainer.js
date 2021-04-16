@@ -1,10 +1,9 @@
 import {connect} from "react-redux";
 import {
-    isFollow,
     setCurrentPage,
     setUsers,
     setTotalUsersCount,
-    toggleIsFetching
+    toggleIsFetching, follow, unfollow
 } from "../../../redux/users-reducer";
 import {useEffect} from "react";
 import axios from "axios";
@@ -12,17 +11,18 @@ import {Users} from "./users";
 import {Preloader} from "../common/preloader/preloader";
 
 const UsersContainer = ({
-                                     users,
-                                     isFollow,
-                                     setUsers,
-                                     pageSize,
-                                     totalUsersCount,
-                                     currentPage,
-                                     setCurrentPage,
-                                     setTotalUsersCount,
-                                     isFetching,
-                                     toggleIsFetching,
-                                 }) => {
+                            follow,
+                            unfollow,
+                            users,
+                            setUsers,
+                            pageSize,
+                            totalUsersCount,
+                            currentPage,
+                            setCurrentPage,
+                            setTotalUsersCount,
+                            isFetching,
+                            toggleIsFetching,
+                        }) => {
 
     useEffect(() => {
         axios.get("https://social-network.samuraijs.com/api/1.0/users")
@@ -33,7 +33,9 @@ const UsersContainer = ({
 
     useEffect(() => {
         toggleIsFetching(true);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${currentPage}&count=${pageSize}`, {
+            withCredentials: true
+        })
             .then(response => {
                 toggleIsFetching(false);
                 setUsers(response.data.items);
@@ -43,7 +45,9 @@ const UsersContainer = ({
     const onPageChanged = (pageNumber) => {
         toggleIsFetching(true);
         setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${pageSize}`)
+        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${pageSize}`, {
+            withCredentials: true
+        })
             .then(response => {
                 toggleIsFetching(false);
                 setUsers(response.data.items);
@@ -58,7 +62,8 @@ const UsersContainer = ({
                 pageSize={pageSize}
                 currentPage={currentPage}
                 onPageChanged={onPageChanged}
-                isFollow={isFollow}
+                follow={follow}
+                unfollow={unfollow}
                 users={users}
             />
         </>
@@ -76,7 +81,8 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    isFollow,
+    follow,
+    unfollow,
     setUsers,
     setCurrentPage,
     setTotalUsersCount,

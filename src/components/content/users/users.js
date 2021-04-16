@@ -1,8 +1,9 @@
 import styles from "./users.module.css";
 import {NavLink} from "react-router-dom";
-import avatar from "../../../assets/images/default_avatar.jpg"
+import avatar from "../../../assets/images/default_avatar.jpg";
+import axios from "axios";
 
-export const Users = ({totalUsersCount, pageSize, currentPage, onPageChanged, isFollow, users}) => {
+export const Users = ({totalUsersCount, pageSize, currentPage, onPageChanged, follow, unfollow, users}) => {
 
     const pagesCount = Math.ceil(totalUsersCount / pageSize);
 
@@ -31,9 +32,35 @@ export const Users = ({totalUsersCount, pageSize, currentPage, onPageChanged, is
                                 </NavLink>
                             </div>
                             <div>
-                                <button onClick={() => isFollow(u.id)}>
-                                    {u.followed ? "Unfollow" : "Follow"}
-                                </button>
+                                {u.followed
+                                    ? <button onClick={() => {
+                                        axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{
+                                            withCredentials: true,
+                                            headers: {
+                                                "API-KEY": "6cf71137-6ca5-4ed8-98f9-85111c1fb4b7"
+                                            }
+                                        })
+                                            .then(response => {
+                                                if (response.data.resultCode === 0) {
+                                                    unfollow(u.id)
+                                                }
+                                            });
+                                    }
+                                    }>Unfollow</button>
+                                    : <button onClick={() => {
+                                        axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{},{
+                                            withCredentials: true,
+                                            headers: {
+                                                "API-KEY": "6cf71137-6ca5-4ed8-98f9-85111c1fb4b7"
+                                            }
+                                        })
+                                            .then(response => {
+                                                if (response.data.resultCode === 0) {
+                                                    follow(u.id)
+                                                }
+                                            });
+                                    }}>Follow</button>
+                                }
                             </div>
                         </span>
                         <span>
