@@ -1,49 +1,23 @@
 import {connect} from "react-redux";
 import {
-    setCurrentPage,
-    setUsers,
-    setTotalUsersCount,
-    toggleIsFetching, follow, unfollow, toggleFollowingProgress
+    toggleFollowingProgress, getUsersThunkCreator, follow, unfollow
 } from "../../../redux/users-reducer";
 import {useEffect} from "react";
 import {Users} from "./users";
 import {Preloader} from "../common/preloader/preloader";
-import {usersAPI} from "../../../api/api";
 
 const UsersContainer = ({
-                            follow,
-                            unfollow,
-                            users,
-                            setUsers,
-                            pageSize,
-                            totalUsersCount,
-                            currentPage,
-                            setCurrentPage,
-                            setTotalUsersCount,
-                            isFetching,
-                            toggleIsFetching,
-                            toggleFollowingProgress,
-                            followingInProgress,
+                            follow, unfollow, users, pageSize, totalUsersCount, currentPage,
+                            isFetching, toggleFollowingProgress,
+                            followingInProgress, getUsersThunkCreator,
                         }) => {
 
     useEffect(() => {
-        toggleIsFetching(true);
-        usersAPI.getUsers(currentPage, pageSize)
-            .then(response => {
-                toggleIsFetching(false);
-                setUsers(response.items);
-                setTotalUsersCount(response.totalCount);
-            });
-    }, [currentPage, pageSize, setTotalUsersCount, setUsers, toggleIsFetching]);
+        getUsersThunkCreator(currentPage, pageSize);
+    }, [currentPage, getUsersThunkCreator, pageSize]);
 
     const onPageChanged = (pageNumber) => {
-        toggleIsFetching(true);
-        setCurrentPage(pageNumber);
-        usersAPI.getUsers(pageNumber, pageSize)
-            .then(response => {
-                toggleIsFetching(false);
-                setUsers(response.items);
-            });
+        getUsersThunkCreator(pageNumber, pageSize);
     };
 
     return (
@@ -76,13 +50,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    follow,
-    unfollow,
-    setUsers,
-    setCurrentPage,
-    setTotalUsersCount,
-    toggleIsFetching,
-    toggleFollowingProgress,
+    follow, unfollow, toggleFollowingProgress, getUsersThunkCreator,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
