@@ -22,6 +22,9 @@ export const NavBar = () => {
             <div className={style.item}>
                 <NavLink to={"/users"} activeClassName={style.activeLink}>Users</NavLink>
             </div>
+            <div className={style.item}>
+                <NavLink to={"/login"} activeClassName={style.activeLink}>Login</NavLink>
+            </div>
         </nav>
     );
 };

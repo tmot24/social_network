@@ -5,6 +5,7 @@ import {
 import {useEffect} from "react";
 import {Users} from "./users";
 import {Preloader} from "../common/preloader/preloader";
+import {compose} from "redux";
 
 const UsersContainer = ({
                             follow, unfollow, users, pageSize, totalUsersCount, currentPage,
@@ -53,4 +54,4 @@ const mapDispatchToProps = {
     follow, unfollow, toggleFollowingProgress, getUsersThunkCreator,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
+export default compose(connect(mapStateToProps, mapDispatchToProps))(UsersContainer)
