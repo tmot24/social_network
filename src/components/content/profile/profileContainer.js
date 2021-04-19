@@ -1,24 +1,24 @@
 import {Profile} from "./profile";
 import {connect} from "react-redux";
 import {useEffect} from "react";
-import {getStatus, getUserProfile, updateStatus} from "../../../redux/profile-reducer";
+import {getUserProfile, getUserStatus, updateUserStatus} from "../../../redux/profile-reducer";
 import {useParams} from "react-router-dom";
 import {compose} from "redux";
 
 const ProfileContainer = ({
                               profile, status,
-                              getUserProfile, getStatus, updateStatus,
+                              getUserProfile, getUserStatus, updateUserStatus,
                           }) => {
 
     const param = useParams().userId || 16528;
 
     useEffect(() => {
         getUserProfile(param);
-        getStatus(param);
-    }, [getStatus, getUserProfile, param]);
+        getUserStatus(param);
+    }, [getUserStatus, getUserProfile, param]);
 
     return (
-        <Profile profile={profile} status={status} updateStatus={updateStatus}/>
+        <Profile profile={profile} status={status} updateUserStatus={updateUserStatus}/>
     );
 };
 
@@ -30,7 +30,7 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-    getUserProfile, getStatus, updateStatus,
+    getUserProfile, getUserStatus, updateUserStatus,
 };
 
 export default compose(connect(mapStateToProps, mapDispatchToProps),/*withAuthRedirect*/)(ProfileContainer);

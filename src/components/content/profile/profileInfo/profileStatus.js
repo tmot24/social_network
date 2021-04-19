@@ -1,7 +1,7 @@
 import {Preloader} from "../../common/preloader/preloader";
 import {useEffect, useState} from "react";
 
-export const ProfileStatus = ({profile, status, updateStatus}) => {
+export const ProfileStatus = ({profile, status, updateUserStatus}) => {
     const [editMode, setEditMode] = useState(false);
     const [localStatus, setLocalStatus] = useState();
 
@@ -15,7 +15,7 @@ export const ProfileStatus = ({profile, status, updateStatus}) => {
 
     const deactivateEditMode = () => {
         setEditMode(false);
-        updateStatus(localStatus);
+        updateUserStatus(localStatus);
     };
 
     const onChange = (e) => {

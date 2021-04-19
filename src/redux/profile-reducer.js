@@ -65,22 +65,18 @@ export const getUserProfile = (userId) => (dispatch) => {
         });
 };
 
-export const getStatus = (userId) => (dispatch) => {
+export const getUserStatus = (userId) => (dispatch) => {
     profileAPI.getStatus(userId)
         .then(response => {
-            console.log("getStatus")
-            console.log(response)
             dispatch(setStatus(response.data));
         });
 };
 
-export const updateStatus = (status) => (dispatch) => {
+export const updateUserStatus = (status) => (dispatch) => {
     profileAPI.updateStatus(status)
         .then(response => {
-            console.log("updateStatus")
-            console.log(response)
             if (response.data.resultCode === 0) {
-                dispatch(setStatus(response.data));
+                dispatch(setStatus(status));
             }
         });
 };
