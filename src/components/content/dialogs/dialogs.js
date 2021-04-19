@@ -1,11 +1,9 @@
 import style from "./dialogs.module.css";
 import {DialogItem} from "./dialogItem/dialogsItem";
 import {Message} from "./message/message";
+import {AddMessageForm} from "../addMessageForm/addMessageForm";
 
-export const Dialogs = ({dialogsPage}) => {
-
-    const addMessage = () => alert("message");
-
+export const Dialogs = ({dialogsPage, sendMessage}) => {
     return (
         <div className={style.dialogs}>
             <div className={style.dialogsItems}>
@@ -19,13 +17,8 @@ export const Dialogs = ({dialogsPage}) => {
                     {
                         dialogsPage.messages.map(elem => <Message key={elem.id} message={elem.message}/>)
                     }
-                    <div>
-                        <textarea/>
-                    </div>
-                    <div>
-                        <button onClick={addMessage}>Add post</button>
-                    </div>
                 </div>
+                <AddMessageForm sendMessage={sendMessage}/>
             </div>
         </div>
     );

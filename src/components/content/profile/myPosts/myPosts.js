@@ -1,20 +1,13 @@
 import style from "./myPosts.module.css";
 import {Post} from "./posts/post";
+import {AddMessageForm} from "../../addMessageForm/addMessageForm";
 
-export const MyPosts = ({posts}) => {
-
-    const addPost = () => alert("Hey");
-
+export const MyPosts = ({posts, addPost}) => {
     return (
         <div className={style.postsBlock}>
             <h3>My Posts</h3>
             <div>
-                <div>
-                    <textarea/>
-                </div>
-                <div>
-                    <button onClick={addPost}>Add post</button>
-                </div>
+                <AddMessageForm sendMessage={addPost}/>
             </div>
             <div className={style.posts}>
                 {

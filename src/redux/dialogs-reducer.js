@@ -1,6 +1,5 @@
 import avatar from "../assets/images/default_avatar.jpg"
 
-const UPDATE_NEW_POST_BODY = "UPDATE_NEW_POST_BODY";
 const SEND_MESSAGE = "SEND_MESSAGE";
 
 const initialState = {
@@ -18,25 +17,15 @@ const initialState = {
         {id: 3, message: "Yo"},
         {id: 4, message: "Yo"},
         {id: 5, message: "Yo"},
-        {id: 6, message: "Yo"},
     ],
-    newMessageBody: "",
 };
 
 export const dialogsReducer = (state = initialState, action) => {
-
     switch (action.type) {
-        case UPDATE_NEW_POST_BODY:
-            return {
-                ...state,
-                newMessageBody: action.body,
-            }
-
         case SEND_MESSAGE:
-            const body = state.newMessageBody;
+            const body = action.newMessageBody;
             return {
                 ...state,
-                newMessageBody: "",
                 messages: [...state.messages, {id: 6, message: body}]
             }
 
@@ -45,5 +34,4 @@ export const dialogsReducer = (state = initialState, action) => {
     }
 };
 
-export const sendMessageCreator = () => ({type: SEND_MESSAGE});
-export const updateNewMessageBodyCreator = (body) => ({type: UPDATE_NEW_POST_BODY, body: body});
+export const sendMessage = (newMessageBody) => ({type: SEND_MESSAGE, newMessageBody});
