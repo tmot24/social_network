@@ -3,7 +3,7 @@ import {Preloader} from "../../common/preloader/preloader";
 import {ProfileStatus} from "./profileStatus";
 
 
-export const ProfileInfo = ({profile}) => {
+export const ProfileInfo = ({profile, status, updateStatus}) => {
     if (!profile) {
         return (
             <Preloader/>
@@ -19,7 +19,7 @@ export const ProfileInfo = ({profile}) => {
             </div>
             <div className={style.descriptionBlock}>
                 <img src={profile.photos.large} alt="img"/>
-                <ProfileStatus profile={profile}/>
+                <ProfileStatus profile={profile} status={status} updateStatus={updateStatus}/>
             </div>
         </div>
     )

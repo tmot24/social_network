@@ -1,22 +1,38 @@
 import {Preloader} from "../../common/preloader/preloader";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
-export const ProfileStatus = ({profile}) => {
+export const ProfileStatus = ({profile, status, updateStatus}) => {
     const [editMode, setEditMode] = useState(false);
+    const [localStatus, setLocalStatus] = useState();
 
-    const toggleEditMode = () => {
-        setEditMode(!editMode);
+    useEffect(() => {
+        setLocalStatus(status);
+    }, [status]);
+
+    const activateEditMode = () => {
+        setEditMode(true);
+    };
+
+    const deactivateEditMode = () => {
+        setEditMode(false);
+        updateStatus(localStatus);
+    };
+
+    const onChange = (e) => {
+        setLocalStatus(e.currentTarget.value);
     };
 
     if (!profile) return <Preloader/>;
     return (
         <div>
-            {editMode
+            {!editMode
                 ? <div>
-                    <input autoFocus={true} onBlur={() => toggleEditMode()} type="text" defaultValue={"Status"}/>
+                    <span onDoubleClick={() => activateEditMode()}>{localStatus || "No status"}</span>
                 </div>
                 : <div>
-                    <span onDoubleClick={() => toggleEditMode()}>Status</span>
+                    <input onChange={onChange}
+                           autoFocus={true} onBlur={() => deactivateEditMode()}
+                           type="text" defaultValue={localStatus}/>
                 </div>
             }
         </div>
