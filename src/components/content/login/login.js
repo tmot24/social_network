@@ -1,15 +1,20 @@
 import {useForm} from "react-hook-form";
 import style from "../addMessageForm/addMessageForm.module.css";
 
-export const LoginForm = ({login}) => {
-    const {register, handleSubmit, formState: {errors}} = useForm();
+export const LoginForm = ({errorMessage, login}) => {
+    const {
+        register, handleSubmit,
+        formState: {errors}
+    } = useForm();
 
     const onSubmit = (data) => {
-        login(data.email, data.password, data.rememberMe)
+        login(data.email, data.password, data.rememberMe);
     };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
+            <div>Use email: free@samuraijs.com</div>
+            <div>Use password: free</div>
             <div className={style.formControl}>
                 <div>
                     <input className={errors.email ? style.error : ""}
@@ -38,6 +43,9 @@ export const LoginForm = ({login}) => {
                 {errors.password && <span>{errors.password.message}</span>}
                 <div>
                     <input type="checkbox" {...register("rememberMe")}/> remember me
+                </div>
+                <div>
+                    {errorMessage && <span>{errorMessage}</span>}
                 </div>
                 <div>
                     <input type="submit" value={"Login"}/>

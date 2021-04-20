@@ -6,11 +6,11 @@ import {useParams} from "react-router-dom";
 import {compose} from "redux";
 
 const ProfileContainer = ({
-                              profile, status,
+                              profile, status, authorizedUserId, isAuth,
                               getUserProfile, getUserStatus, updateUserStatus,
                           }) => {
 
-    const param = useParams().userId || 16528;
+    const param = useParams().userId || authorizedUserId;
 
     useEffect(() => {
         getUserProfile(param);
@@ -26,6 +26,8 @@ const mapStateToProps = (state) => {
     return {
         profile: state.profilePage.profile,
         status: state.profilePage.status,
+        authorizedUserId: state.auth.userId,
+        isAuth: state.auth.isAuth,
     };
 };
 

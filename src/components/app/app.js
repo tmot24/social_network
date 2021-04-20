@@ -9,8 +9,16 @@ import UsersContainer from "../content/users/usersContainer";
 import ProfileContainer from "../content/profile/profileContainer";
 import HeaderContainer from "../header/headerContainer";
 import LoginContainer from "../content/login/loginContainer";
+import {useEffect} from "react";
+import {getAuthUserData} from "../../redux/auth-reducer";
+import {connect} from "react-redux";
 
-export const App = () => {
+const App = ({getAuthUserData}) => {
+
+    useEffect(() => {
+        getAuthUserData();
+    }, [getAuthUserData]);
+
     return (
         <BrowserRouter>
             <div className={"app-wrapper"}>
@@ -29,3 +37,9 @@ export const App = () => {
         </BrowserRouter>
     );
 };
+
+const mapDispatchToProps = {
+    getAuthUserData,
+};
+
+export default connect(null, mapDispatchToProps)(App);
