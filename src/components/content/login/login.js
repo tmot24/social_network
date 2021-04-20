@@ -5,7 +5,7 @@ export const LoginForm = ({login}) => {
     const {register, handleSubmit, formState: {errors}} = useForm();
 
     const onSubmit = (data) => {
-        login(data.login, data.password, data.rememberMe)
+        login(data.email, data.password, data.rememberMe)
     };
 
     return (

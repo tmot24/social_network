@@ -1,17 +1,17 @@
 import {Header} from "./header";
 import {useEffect} from "react";
 import {connect} from "react-redux";
-import {getAuthUserData} from "../../redux/auth-reducer";
+import {getAuthUserData, logout} from "../../redux/auth-reducer";
 
 
-const HeaderContainer = ({isAuth, login, getAuthUserData}) => {
+const HeaderContainer = ({isAuth, login, getAuthUserData, logout}) => {
 
     useEffect(() => {
         getAuthUserData();
     }, [getAuthUserData]);
 
     return (
-        <Header isAuth={isAuth} login={login}/>
+        <Header isAuth={isAuth} login={login} logout={logout}/>
     );
 };
 
@@ -24,6 +24,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = {
     getAuthUserData,
+    logout,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(HeaderContainer);
