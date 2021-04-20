@@ -10,14 +10,20 @@ import ProfileContainer from "../content/profile/profileContainer";
 import HeaderContainer from "../header/headerContainer";
 import LoginContainer from "../content/login/loginContainer";
 import {useEffect} from "react";
-import {getAuthUserData} from "../../redux/auth-reducer";
 import {connect} from "react-redux";
+import {initializeApp} from "../../redux/app-reducer";
+import {Preloader} from "../content/common/preloader/preloader";
 
-const App = ({getAuthUserData}) => {
+const App = ({initialized, initializeApp}) => {
 
     useEffect(() => {
-        getAuthUserData();
-    }, [getAuthUserData]);
+        initializeApp();
+    }, [initializeApp]);
+
+    if (!initialized) return (
+        <div className={"app-wrapper"}>
+            <Preloader/>
+        </div>);
 
     return (
         <BrowserRouter>
@@ -38,8 +44,14 @@ const App = ({getAuthUserData}) => {
     );
 };
 
-const mapDispatchToProps = {
-    getAuthUserData,
+const mapStateToProps = (state) => {
+    return {
+        initialized: state.app.initialized
+    };
 };
 
-export default connect(null, mapDispatchToProps)(App);
+const mapDispatchToProps = {
+    initializeApp,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
