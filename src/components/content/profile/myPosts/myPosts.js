@@ -7,7 +7,7 @@ export const MyPosts = ({posts, addPost}) => {
         <div className={style.postsBlock}>
             <h3>My Posts</h3>
             <div>
-                <AddMessageForm sendMessage={addPost}/>
+                <AddMessageForm sendMessage={addPost} maxLength={10}/>
             </div>
             <div className={style.posts}>
                 {

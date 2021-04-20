@@ -6,7 +6,7 @@ export const Header = ({isAuth, login}) => {
         <header className={style.header}>
             <img src="https://seeklogo.com/images/C/company-name-logo-C74A7D6F5A-seeklogo.com.png" alt="img"/>
             <div className={style.loginBlock}>
-                {isAuth ? login :  <NavLink to={"/form"}>Login</NavLink>}
+                {isAuth ? login :  <NavLink to={"/login"}>Login</NavLink>}
             </div>
         </header>
     );

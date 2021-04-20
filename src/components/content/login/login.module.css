@@ -1,0 +1,8 @@
+.formControl .error {
+    border: solid red 2px;
+}
+
+.formControl span {
+    margin-left: 5px;
+    color: red;
+}

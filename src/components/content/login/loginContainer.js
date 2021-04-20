@@ -1,26 +1,18 @@
 import {LoginForm} from "./login";
-import {compose} from "redux";
 import {connect} from "react-redux";
+import {login} from "../../../redux/auth-reducer";
 
-export const LoginContainer = ({
-                                   login, password, rememberMe,
-                               }) => {
+const LoginContainer = ({login}) => {
     return (
         <div>
             <h1>Login</h1>
-            <LoginForm login={login} password={password} rememberMe={rememberMe}/>
+            <LoginForm login={login}/>
         </div>
     );
 };
 
-const mapStateToProps = (state) => {
-    return {
-        login: state.login.login,
-        password: state.login.password,
-        rememberMe: state.login.rememberMe,
-    };
-};
+const mapDispatchToProps = {
+    login,
+}
 
-const mapDispatchToProps = {};
-
-export default compose(connect(mapStateToProps, mapDispatchToProps),/*withAuthRedirect*/)(LoginContainer);
+export default connect(null, mapDispatchToProps)(LoginContainer)

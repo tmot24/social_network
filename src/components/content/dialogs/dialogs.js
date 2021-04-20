@@ -18,7 +18,7 @@ export const Dialogs = ({dialogsPage, sendMessage}) => {
                         dialogsPage.messages.map(elem => <Message key={elem.id} message={elem.message}/>)
                     }
                 </div>
-                <AddMessageForm sendMessage={sendMessage}/>
+                <AddMessageForm sendMessage={sendMessage} maxLength={50}/>
             </div>
         </div>
     );

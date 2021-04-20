@@ -8,7 +8,7 @@ import DialogsContainer from "../content/dialogs/dialogs-container";
 import UsersContainer from "../content/users/usersContainer";
 import ProfileContainer from "../content/profile/profileContainer";
 import HeaderContainer from "../header/headerContainer";
-import {LoginContainer} from "../content/login/loginContainer";
+import LoginContainer from "../content/login/loginContainer";
 
 export const App = () => {
     return (
