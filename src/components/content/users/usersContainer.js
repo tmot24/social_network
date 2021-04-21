@@ -6,12 +6,8 @@ import {useEffect} from "react";
 import {Users} from "./users";
 import {Preloader} from "../common/preloader/preloader";
 import {
-    getCurrentPage,
-    getFollowingInProgress,
-    getIsFetching,
-    getPageSize,
-    getTotalUsersCount,
-    getUsers
+    getCurrentPageSelector, getFollowingInProgressSelector, getIsFetchingSelector, getPageSizeSelector,
+    getTotalUsersCountSelector, getUsersSelector,
 } from "./usersSelectors";
 
 const UsersContainer = ({
@@ -48,12 +44,12 @@ const UsersContainer = ({
 
 const mapStateToProps = (state) => {
     return {
-        users: getUsers(state),
-        pageSize: getPageSize(state),
-        totalUsersCount: getTotalUsersCount(state),
-        currentPage: getCurrentPage(state),
-        isFetching: getIsFetching(state),
-        followingInProgress: getFollowingInProgress(state),
+        users: getUsersSelector(state),
+        pageSize: getPageSizeSelector(state),
+        totalUsersCount: getTotalUsersCountSelector(state),
+        currentPage: getCurrentPageSelector(state),
+        isFetching: getIsFetchingSelector(state),
+        followingInProgress: getFollowingInProgressSelector(state),
     };
 };
 
@@ -61,4 +57,4 @@ const mapDispatchToProps = {
     follow, unfollow, toggleFollowingProgress, getUsersThunkCreator,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer)
+export default connect(mapStateToProps, mapDispatchToProps)(UsersContainer);
