@@ -21,9 +21,9 @@ const UsersContainer = ({
         getUsersThunkCreator(pageNumber, pageSize);
     };
 
-    if (isFetching) return <Preloader/>
     return (
         <>
+            {isFetching ? <Preloader/> : null}
             <Users
                 totalUsersCount={totalUsersCount}
                 pageSize={pageSize}

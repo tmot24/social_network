@@ -2,13 +2,13 @@ import styles from "./paginator.module.css";
 import {useState} from "react";
 
 export const Paginator = ({totalItemsCount, pageSize, currentPage, onPageChanged, portionSize = 10}) => {
-    let [portionNumber, setPortionNumber] = useState(1);
+    const [portionNumber, setPortionNumber] = useState(1);
 
     const pagesCount = Math.ceil(totalItemsCount / pageSize);
     const pages = Array.from({length: pagesCount}, (_, k) => k + 1);
-    let portionCount = Math.ceil(pagesCount / portionSize);
-    let leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
-    let rightPortionPageNumber = portionNumber * portionSize;
+    const portionCount = Math.ceil(pagesCount / portionSize);
+    const leftPortionPageNumber = (portionNumber - 1) * portionSize + 1;
+    const rightPortionPageNumber = portionNumber * portionSize;
 
     return (
         <div className={styles.paginator}>
