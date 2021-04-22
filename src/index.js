@@ -4,15 +4,16 @@ import './index.css';
 import App from './components/app/app';
 import {store} from "./redux/redux-store";
 import {Provider} from "react-redux";
-import {BrowserRouter} from "react-router-dom";
+import {HashRouter} from "react-router-dom";
 
 ReactDOM.render(
     <React.StrictMode>
-        <BrowserRouter>
+        {/*BrowserRouter without HashRouter*/}
+        <HashRouter basename={process.env.PUBLIC_URL}>
             <Provider store={store}>
                 <App/>
             </Provider>
-        </BrowserRouter>
+        </HashRouter>
     </React.StrictMode>,
     document.getElementById('root')
 );
