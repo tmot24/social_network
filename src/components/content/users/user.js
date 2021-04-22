@@ -5,7 +5,7 @@ import styles from "./users.module.css";
 
 export const User = ({user, followingInProgress, follow, unfollow}) => {
     return (
-        <div key={user.id}>
+        <div>
             <div>
                 <div>
                     <NavLink to={`/profile/${user.id}`}>

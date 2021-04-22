@@ -11,8 +11,12 @@ export const Users = ({
             <Paginator totalUsersCount={totalUsersCount} pageSize={pageSize} currentPage={currentPage}
                        onPageChanged={onPageChanged}/>
             {
-                users.map(user => <User user={user} followingInProgress={followingInProgress}
-                                        follow={follow} unfollow={unfollow}/>)
+                users.map(user => (
+                    <div key={user.id}>
+                        <User user={user} followingInProgress={followingInProgress}
+                              follow={follow} unfollow={unfollow}/>
+                    </div>)
+                )
             }
         </div>
     );
