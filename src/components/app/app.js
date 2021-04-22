@@ -10,6 +10,7 @@ import {useEffect} from "react";
 import {connect} from "react-redux";
 import {initializeApp} from "../../redux/app-reducer";
 import {Preloader} from "../content/common/preloader/preloader";
+import {Welcome} from "../content/welcome/welcome";
 
 const App = ({initialized, initializeApp}) => {
 
@@ -27,6 +28,7 @@ const App = ({initialized, initializeApp}) => {
             <HeaderContainer/>
             <NavBar/>
             <div className={"app-wrapper-content"}>
+                <Route path={"/"} exact component={Welcome}/>
                 <Route path={"/profile/:userId?"} component={ProfileContainer}/>
                 <Route path={"/dialogs"} component={DialogsContainer}/>
                 <Route path={"/users"} component={UsersContainer}/>
