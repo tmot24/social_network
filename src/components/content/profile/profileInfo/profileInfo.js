@@ -1,6 +1,7 @@
 import style from "./profileInfo.module.css"
 import {Preloader} from "../../common/preloader/preloader";
 import {ProfileStatus} from "./profileStatus";
+import avatar from "../../../../assets/images/default_avatar.jpg"
 
 
 export const ProfileInfo = ({profile, status, updateUserStatus}) => {
@@ -18,7 +19,7 @@ export const ProfileInfo = ({profile, status, updateUserStatus}) => {
                      alt="img"/>
             </div>
             <div className={style.descriptionBlock}>
-                <img src={profile.photos.large} alt="img"/>
+                <img className={style.avatar} src={profile.photos.large || avatar} alt="img"/>
                 <ProfileStatus profile={profile} status={status} updateUserStatus={updateUserStatus}/>
             </div>
         </div>

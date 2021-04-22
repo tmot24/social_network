@@ -11,6 +11,18 @@ export const LoginForm = ({errorMessage, login}) => {
         login(data.email, data.password, data.rememberMe);
     };
 
+    const fieldOption = ({
+        required: "Field is required",
+        minLength: {
+            value: 2,
+            message: "Less than 2"
+        }
+    });
+
+    const errorSpan = (field) => {
+        return errors[field] && <span>{errors[field].message}</span>
+    }
+
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
             <div>Use email: free@samuraijs.com</div>
@@ -19,28 +31,15 @@ export const LoginForm = ({errorMessage, login}) => {
                 <div>
                     <input className={errors.email ? style.error : ""}
                            type="text" placeholder={"Email"}
-                           {...register("email",
-                               ({
-                                   required: "Field is required",
-                                   minLength: {
-                                       value: 2,
-                                       message: "Less than 2"
-                                   }
-                               }))}/>
+                           {...register("email", (fieldOption))}/>
                 </div>
-                {errors.email && <span>{errors.email.message}</span>}
+                {errorSpan("email")}
                 <div>
                     <input className={errors.password ? style.error : ""}
                            type="password" placeholder={"Password"}
-                           {...register("password", ({
-                               required: "Field is required",
-                               minLength: {
-                                   value: 2,
-                                   message: "Less than 2"
-                               }
-                           }))}/>
+                           {...register("password", (fieldOption))}/>
                 </div>
-                {errors.password && <span>{errors.password.message}</span>}
+                {errorSpan("password")}
                 <div>
                     <input type="checkbox" {...register("rememberMe")}/> remember me
                 </div>

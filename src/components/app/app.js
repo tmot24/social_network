@@ -1,6 +1,6 @@
 import "./app.css";
 import {NavBar} from "../navBar/navBar";
-import {BrowserRouter, Route} from "react-router-dom";
+import {Route} from "react-router-dom";
 import DialogsContainer from "../content/dialogs/dialogs-container";
 import UsersContainer from "../content/users/usersContainer";
 import ProfileContainer from "../content/profile/profileContainer";
@@ -23,18 +23,16 @@ const App = ({initialized, initializeApp}) => {
         </div>);
 
     return (
-        <BrowserRouter>
-            <div className={"app-wrapper"}>
-                <HeaderContainer/>
-                <NavBar/>
-                <div className={"app-wrapper-content"}>
-                    <Route path={"/profile/:userId?"} component={ProfileContainer}/>
-                    <Route path={"/dialogs"} component={DialogsContainer}/>
-                    <Route path={"/users"} component={UsersContainer}/>
-                    <Route path={"/login"} component={LoginContainer}/>
-                </div>
+        <div className={"app-wrapper"}>
+            <HeaderContainer/>
+            <NavBar/>
+            <div className={"app-wrapper-content"}>
+                <Route path={"/profile/:userId?"} component={ProfileContainer}/>
+                <Route path={"/dialogs"} component={DialogsContainer}/>
+                <Route path={"/users"} component={UsersContainer}/>
+                <Route path={"/login"} component={LoginContainer}/>
             </div>
-        </BrowserRouter>
+        </div>
     );
 };
 
