@@ -9,3 +9,10 @@
 .avatar {
     height: 200px;
 }
+
+.contact {
+    padding-left: 10px;
+}
+.error {
+    color: red;
+}

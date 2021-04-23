@@ -27,7 +27,11 @@ export const ProfileStatus = ({profile, status, updateUserStatus, isOwner}) => {
         <div>
             {!editMode
                 ? <div>
-                    <span onDoubleClick={isOwner ? () => activateEditMode() : null}>{localStatus || "No status"}</span>
+                    <div>
+                        <b>Status: </b>
+                        <span onDoubleClick={isOwner ? () => activateEditMode() : null}>{localStatus || "No status"}</span>
+                    </div>
+
                 </div>
                 : <div>
                     <input onChange={onChange}
