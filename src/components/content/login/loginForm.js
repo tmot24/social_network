@@ -1,14 +1,14 @@
 import {useForm} from "react-hook-form";
 import style from "../addMessageForm/addMessageForm.module.css";
 
-export const LoginForm = ({errorMessage, login}) => {
+export const LoginForm = ({errorMessage, login, captchaUrl}) => {
     const {
         register, handleSubmit,
         formState: {errors}
     } = useForm();
 
     const onSubmit = (data) => {
-        login(data.email, data.password, data.rememberMe);
+        login(data.email, data.password, data.rememberMe, data.captcha);
     };
 
     const fieldOption = ({
@@ -20,8 +20,8 @@ export const LoginForm = ({errorMessage, login}) => {
     });
 
     const errorSpan = (field) => {
-        return errors[field] && <span>{errors[field].message}</span>
-    }
+        return errors[field] && <span>{errors[field].message}</span>;
+    };
 
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -46,6 +46,12 @@ export const LoginForm = ({errorMessage, login}) => {
                 <div>
                     {errorMessage && <span>{errorMessage}</span>}
                 </div>
+                {captchaUrl && <img src={captchaUrl} alt="captcha"/>}
+                {captchaUrl && <div>
+                    <input className={errors.captcha ? style.error : ""}
+                           type="text" placeholder={"Captcha"}
+                           {...register("captcha", ({required: "Field is required"}))}/>
+                </div>}
                 <div>
                     <input type="submit" value={"Login"}/>
                 </div>
