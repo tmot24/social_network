@@ -8,7 +8,7 @@ import {HashRouter} from "react-router-dom";
 
 ReactDOM.render(
     <React.StrictMode>
-        {/*BrowserRouter without HashRouter*/}
+        {/*HashRouter for github pages / BrowserRouter*/}
         <HashRouter basename={process.env.PUBLIC_URL}>
             <Provider store={store}>
                 <App/>
