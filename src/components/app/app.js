@@ -9,6 +9,8 @@ import {connect} from "react-redux";
 import {initializeApp} from "../../redux/app-reducer";
 import {Preloader} from "../content/common/preloader/preloader";
 import {Welcome} from "../content/welcome/welcome";
+import {NotFound} from "../content/notFound/notFound";
+import ErrorBoundary from "../content/errorBoundary/errorBoundary";
 
 const ProfileContainer = lazy(() => import("../content/profile/profileContainer"));
 const UsersContainer = lazy(() => import("../content/users/usersContainer"));
@@ -29,19 +31,22 @@ const App = ({initialized, initializeApp}) => {
     if (!initialized) return preloader;
     return (
         <div className={"app-wrapper"}>
-            <HeaderContainer/>
-            <NavBar/>
-            <div className={"app-wrapper-content"}>
-                <Suspense fallback={preloader}>
-                    <Switch>
-                        <Route path={"/"} exact component={Welcome}/>
-                        <Route path={"/profile/:userId?"} component={ProfileContainer}/>
-                        <Route path={"/dialogs"} component={DialogsContainer}/>
-                        <Route path={"/users"} component={UsersContainer}/>
-                        <Route path={"/login"} component={LoginContainer}/>
-                    </Switch>
-                </Suspense>
-            </div>
+            <ErrorBoundary>
+                <HeaderContainer/>
+                <NavBar/>
+                <div className={"app-wrapper-content"}>
+                    <Suspense fallback={preloader}>
+                        <Switch>
+                            <Route path={"/"} exact component={Welcome}/>
+                            <Route path={"/profile/:userId?"} component={ProfileContainer}/>
+                            <Route path={"/dialogs"} component={DialogsContainer}/>
+                            <Route path={"/users"} component={UsersContainer}/>
+                            <Route path={"/login"} component={LoginContainer}/>
+                            <Route component={NotFound}/>
+                        </Switch>
+                    </Suspense>
+                </div>
+            </ErrorBoundary>
         </div>
     );
 };
