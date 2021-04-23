@@ -28,8 +28,6 @@ export const User = ({user, followingInProgress, follow, unfollow}) => {
             <div>
                 <div>{user.name}</div>
                 <div>{user.status}</div>
-                <div>{"user.location.country"}</div>
-                <div>{"user.location.city"}</div>
             </div>
         </div>
     );

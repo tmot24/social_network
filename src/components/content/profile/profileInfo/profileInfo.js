@@ -1,16 +1,18 @@
-import style from "./profileInfo.module.css"
+import style from "./profileInfo.module.css";
 import {Preloader} from "../../common/preloader/preloader";
 import {ProfileStatus} from "./profileStatus";
-import avatar from "../../../../assets/images/default_avatar.jpg"
+import avatar from "../../../../assets/images/default_avatar.jpg";
 
 
-export const ProfileInfo = ({profile, status, updateUserStatus}) => {
-    if (!profile) {
-        return (
-            <Preloader/>
-        )
-    }
+export const ProfileInfo = ({profile, status, updateUserStatus, isOwner, savePhoto}) => {
 
+    const mainPhotoSelected = (e) => {
+        if (e.target.files.length) {
+            savePhoto(e.target.files[0]);
+        }
+    };
+
+    if (!profile) return <Preloader/>;
     return (
         <div>
             <div>
@@ -20,8 +22,9 @@ export const ProfileInfo = ({profile, status, updateUserStatus}) => {
             </div>
             <div className={style.descriptionBlock}>
                 <img className={style.avatar} src={profile.photos.large || avatar} alt="img"/>
-                <ProfileStatus profile={profile} status={status} updateUserStatus={updateUserStatus}/>
+                <ProfileStatus profile={profile} status={status} updateUserStatus={updateUserStatus} isOwner={isOwner}/>
             </div>
+            {isOwner && <input type={"file"} onChange={mainPhotoSelected}/>}
         </div>
-    )
-}
+    );
+};

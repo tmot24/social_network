@@ -1,7 +1,7 @@
 import {Preloader} from "../../common/preloader/preloader";
 import {useEffect, useState} from "react";
 
-export const ProfileStatus = ({profile, status, updateUserStatus}) => {
+export const ProfileStatus = ({profile, status, updateUserStatus, isOwner}) => {
     const [editMode, setEditMode] = useState(false);
     const [localStatus, setLocalStatus] = useState();
 
@@ -27,7 +27,7 @@ export const ProfileStatus = ({profile, status, updateUserStatus}) => {
         <div>
             {!editMode
                 ? <div>
-                    <span onDoubleClick={() => activateEditMode()}>{localStatus || "No status"}</span>
+                    <span onDoubleClick={isOwner ? () => activateEditMode() : null}>{localStatus || "No status"}</span>
                 </div>
                 : <div>
                     <input onChange={onChange}
