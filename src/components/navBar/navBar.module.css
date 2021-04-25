@@ -1,16 +1,15 @@
 .nav {
     grid-area: navBar;
     background-color: white;
+}
+.link {
     text-decoration: none;
-    color: gold;
 }
 
-.nav .activeLink {
-    text-decoration: none;
-    color: black;
+.activeLink {
+    background-color: black;
 }
 
-.item {
-    color: blue;
-    text-decoration: none;
+a:hover{
+  text-decoration: none;
 }

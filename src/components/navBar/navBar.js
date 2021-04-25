@@ -5,25 +5,25 @@ import {List, ListItem, ListItemText} from "@material-ui/core";
 export const NavBar = () => {
     return (
         <>
-            <List component="nav"  aria-label="mailbox folders" style={{padding: 0, textDecoration: "none"}} className={style.nav}>
-                <NavLink to={"/profile"} activeClassName={style.activeLink}>
+            <List component="nav" className={style.nav} disablePadding>
+                <NavLink to={"/profile"} className={style.link} activeClassName={style.activeLink}>
                     <ListItem button divider>
-                        <ListItemText className={style.item} primary="Profile"/>
+                        <ListItemText primary="Profile"/>
                     </ListItem>
                 </NavLink>
-                <NavLink to={"/dialogs"} activeClassName={style.activeLink}>
+                <NavLink to={"/dialogs"} className={style.link} activeClassName={style.activeLink}>
                     <ListItem button divider>
-                        <ListItemText className={style.item} primary="Dialogs"/>
+                        <ListItemText primary="Dialogs"/>
                     </ListItem>
                 </NavLink>
-                <NavLink to={"/users"} activeClassName={style.activeLink}>
+                <NavLink to={"/users"} className={style.link} activeClassName={style.activeLink}>
                     <ListItem button divider>
-                        <ListItemText className={style.item} primary="Users"/>
+                        <ListItemText primary="Users" style={{textDecoration: "none"}}/>
                     </ListItem>
                 </NavLink>
-                <NavLink to={"/login"} activeClassName={style.activeLink}>
+                <NavLink to={"/login"} className={style.link} activeClassName={style.activeLink}>
                     <ListItem button divider>
-                        <ListItemText className={style.item} primary="Login"/>
+                        <ListItemText primary="Login"/>
                     </ListItem>
                 </NavLink>
             </List>

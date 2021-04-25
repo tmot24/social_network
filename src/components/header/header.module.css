@@ -9,8 +9,10 @@
 
 .login {
     display: flex;
+    align-items: center;
 }
 .login h3 {
+    margin: 0;
     padding-right: 20px;
 }
 
@@ -20,8 +22,4 @@
 
 .navLink {
     text-decoration: none;
-    color: black;
-}
-a:hover{
-    color: black;
 }
