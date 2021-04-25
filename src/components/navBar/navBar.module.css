@@ -5,11 +5,7 @@
 .link {
     text-decoration: none;
 }
-
 .activeLink {
     background-color: black;
 }
 
-a:hover{
-  text-decoration: none;
-}
