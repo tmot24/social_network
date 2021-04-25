@@ -1,21 +1,32 @@
 import style from "./navBar.module.css";
 import {NavLink} from "react-router-dom";
+import {List, ListItem, ListItemText} from "@material-ui/core";
 
 export const NavBar = () => {
     return (
-        <nav className={style.nav}>
-            <div className={style.item}>
-                <NavLink to={"/profile"} activeClassName={style.activeLink}>Profile</NavLink>
-            </div>
-            <div className={style.item}>
-                <NavLink to={"/dialogs"} activeClassName={style.activeLink}>Dialogs</NavLink>
-            </div>
-            <div className={style.item}>
-                <NavLink to={"/users"} activeClassName={style.activeLink}>Users</NavLink>
-            </div>
-            <div className={style.item}>
-                <NavLink to={"/login"} activeClassName={style.activeLink}>Login</NavLink>
-            </div>
-        </nav>
+        <>
+            <List component="nav"  aria-label="mailbox folders" style={{padding: 0, textDecoration: "none"}} className={style.nav}>
+                <NavLink to={"/profile"} activeClassName={style.activeLink}>
+                    <ListItem button divider>
+                        <ListItemText className={style.item} primary="Profile"/>
+                    </ListItem>
+                </NavLink>
+                <NavLink to={"/dialogs"} activeClassName={style.activeLink}>
+                    <ListItem button divider>
+                        <ListItemText className={style.item} primary="Dialogs"/>
+                    </ListItem>
+                </NavLink>
+                <NavLink to={"/users"} activeClassName={style.activeLink}>
+                    <ListItem button divider>
+                        <ListItemText className={style.item} primary="Users"/>
+                    </ListItem>
+                </NavLink>
+                <NavLink to={"/login"} activeClassName={style.activeLink}>
+                    <ListItem button divider>
+                        <ListItemText className={style.item} primary="Login"/>
+                    </ListItem>
+                </NavLink>
+            </List>
+        </>
     );
 };
