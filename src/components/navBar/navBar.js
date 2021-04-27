@@ -11,11 +11,9 @@ export const NavBar = () => {
                         <ListItemText primary="Profile"/>
                     </ListItem>
                 </NavLink>
-                <NavLink to={"/dialogs"} className={style.link}>
-                    <ListItem button divider>
-                        <ListItemText primary="Dialogs"/>
-                    </ListItem>
-                </NavLink>
+                <ListItem button divider component={NavLink} to={"/dialogs"} className={style.link}>
+                	<ListItemText primary="Dialogs"/>
+                </ListItem>
                 <NavLink to={"/users"} className={style.link}>
                     <ListItem button divider>
                         <ListItemText primary="Users"/>
