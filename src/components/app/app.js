@@ -1,4 +1,4 @@
-import {lazy, Suspense} from 'react';
+import React, {lazy, Suspense, useState} from 'react';
 import "./app.css";
 import {NavBar} from "../navBar/navBar";
 import {Route, Switch} from "react-router-dom";
@@ -11,16 +11,26 @@ import {Preloader} from "../content/common/preloader/preloader";
 import {Welcome} from "../content/welcome/welcome";
 import {NotFound} from "../content/notFound/notFound";
 import ErrorBoundary from "../content/errorBoundary/errorBoundary";
+import {Test} from "../content/test/test";
+import {ThemeProvider} from "@material-ui/core/styles";
+import {CssBaseline} from "@material-ui/core";
+import { createMuiTheme } from '@material-ui/core/styles';
 
 const ProfileContainer = lazy(() => import("../content/profile/profileContainer"));
 const UsersContainer = lazy(() => import("../content/users/usersContainer"));
 const DialogsContainer = lazy(() => import("../content/dialogs/dialogs-container"));
 
 const App = ({initialized, initializeApp}) => {
-
+    const [darkMode, setDarkMode] = useState(true);
     useEffect(() => {
         initializeApp();
     }, [initializeApp]);
+
+    const theme = createMuiTheme({
+        palette: {
+            type: darkMode ? "dark" : "light",
+        }
+    })
 
     const preloader = (
         <div className={"app-wrapper"}>
@@ -30,24 +40,28 @@ const App = ({initialized, initializeApp}) => {
 
     if (!initialized) return preloader;
     return (
-        <div className={"app-wrapper"}>
-            <ErrorBoundary>
-                <HeaderContainer/>
-                <NavBar/>
-                <div className={"app-wrapper-content"}>
-                    <Suspense fallback={preloader}>
-                        <Switch>
-                            <Route path={"/"} exact component={Welcome}/>
-                            <Route path={"/profile/:userId?"} component={ProfileContainer}/>
-                            <Route path={"/dialogs"} component={DialogsContainer}/>
-                            <Route path={"/users"} component={UsersContainer}/>
-                            <Route path={"/login"} component={LoginContainer}/>
-                            <Route component={NotFound}/>
-                        </Switch>
-                    </Suspense>
-                </div>
-            </ErrorBoundary>
-        </div>
+        <ThemeProvider theme={theme}>
+            <CssBaseline/>
+            <div className={"app-wrapper"}>
+                <ErrorBoundary>
+                    <HeaderContainer darkMode={darkMode} setDarkMode={setDarkMode}/>
+                    <NavBar/>
+                    <div className={"app-wrapper-content"}>
+                        <Suspense fallback={preloader}>
+                            <Switch>
+                                <Route path={"/"} exact component={Welcome}/>
+                                <Route path={"/profile/:userId?"} component={ProfileContainer}/>
+                                <Route path={"/dialogs"} component={DialogsContainer}/>
+                                <Route path={"/users"} component={UsersContainer}/>
+                                <Route path={"/login"} component={LoginContainer}/>
+                                <Route path={"/test"} component={Test}/>
+                                <Route component={NotFound}/>
+                            </Switch>
+                        </Suspense>
+                    </div>
+                </ErrorBoundary>
+            </div>
+        </ThemeProvider>
     );
 };
 
