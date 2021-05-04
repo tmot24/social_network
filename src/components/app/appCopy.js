@@ -1,4 +1,5 @@
 import {lazy, Suspense, useState} from 'react';
+import "./app.css";
 import {NavBar} from "../navBar/navBar";
 import {Route, Switch} from "react-router-dom";
 import HeaderContainer from "../header/headerContainer";
@@ -12,8 +13,8 @@ import {NotFound} from "../content/notFound/notFound";
 import ErrorBoundary from "../content/errorBoundary/errorBoundary";
 import {Test} from "../content/test/test";
 import {ThemeProvider} from "@material-ui/core/styles";
-import {CssBaseline, Grid} from "@material-ui/core";
-import {createMuiTheme} from '@material-ui/core/styles';
+import {CssBaseline} from "@material-ui/core";
+import { createMuiTheme } from '@material-ui/core/styles';
 import ProfileContainer from "../content/profile/profileContainer";
 import UsersContainer from "../content/users/usersContainer";
 
@@ -35,7 +36,7 @@ const App = ({initialized, initializeApp}) => {
                 main: "#000000FF"
             },
         }
-    });
+    })
 
     const preloader = (
         <div className={"app-wrapper"}>
@@ -47,29 +48,25 @@ const App = ({initialized, initializeApp}) => {
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>
-            <Grid container direction={"column"}>
+            <div className={"app-wrapper"}>
                 <ErrorBoundary>
-                    <Grid item>
-                        <HeaderContainer darkMode={darkMode} setDarkMode={setDarkMode}/>
-                    </Grid>
-                    <Grid item>
-                        {/*<NavBar/>*/}
-                    </Grid>
-                    <Grid item>
+                    <HeaderContainer darkMode={darkMode} setDarkMode={setDarkMode}/>
+                    <NavBar/>
+                    <div className={"app-wrapper-content"}>
                         <Suspense fallback={preloader}>
                             <Switch>
-                                {/*<Route path={"/"} exact component={Welcome}/>*/}
-                                {/*<Route path={"/profile/:userId?"} component={ProfileContainer}/>*/}
-                                {/*<Route path={"/dialogs"} component={DialogsContainer}/>*/}
-                                {/*<Route path={"/users"} component={UsersContainer}/>*/}
+                                <Route path={"/"} exact component={Welcome}/>
+                                <Route path={"/profile/:userId?"} component={ProfileContainer}/>
+                                <Route path={"/dialogs"} component={DialogsContainer}/>
+                                <Route path={"/users"} component={UsersContainer}/>
                                 <Route path={"/login"} component={LoginContainer}/>
-                                {/*<Route path={"/test"} component={Test}/>*/}
-                                {/*<Route component={NotFound}/>*/}
+                                <Route path={"/test"} component={Test}/>
+                                <Route component={NotFound}/>
                             </Switch>
                         </Suspense>
-                    </Grid>
+                    </div>
                 </ErrorBoundary>
-            </Grid>
+            </div>
         </ThemeProvider>
     );
 };

@@ -1,5 +1,5 @@
 import {NavLink} from "react-router-dom";
-import avatar from "../../../assets/images/default_avatar.jpg";
+import avatar from "../../../assets/images/avatar.svg";
 import {Button, CardActions, Grid} from "@material-ui/core";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";

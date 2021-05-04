@@ -1,4 +1,4 @@
-import avatar from "../assets/images/default_avatar.jpg"
+import avatar from "../assets/images/avatar.svg"
 
 const SEND_MESSAGE = "SEND_MESSAGE";
 

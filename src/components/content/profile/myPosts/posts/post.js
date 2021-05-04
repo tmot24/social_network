@@ -1,5 +1,5 @@
 import style from "./post.module.css";
-import avatar from "../../../../../assets/images/default_avatar.jpg"
+import avatar from "../../../../../assets/images/avatar.svg"
 
 export const Post = ({message, likesCount}) => {
     return (
