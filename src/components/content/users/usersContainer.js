@@ -5,8 +5,7 @@ import {
 import {useEffect} from "react";
 import {Users} from "./users";
 import {getUsersSelector} from "./usersSelectors";
-import {LinearProgress} from "@material-ui/core";
-import {useTheme} from "@material-ui/core/styles";
+import {Preloader} from "../common/preloader/preloader";
 
 const UsersContainer = ({
                             follow, unfollow, users, pageSize, totalUsersCount, currentPage,
@@ -18,8 +17,6 @@ const UsersContainer = ({
         getUsersThunkCreator(currentPage, pageSize);
     }, [currentPage, getUsersThunkCreator, pageSize]);
 
-    const theme = useTheme();
-
     const onPageChanged = (pageNumber) => {
         getUsersThunkCreator(pageNumber, pageSize);
     };
@@ -27,10 +24,7 @@ const UsersContainer = ({
     return (
         <>
             {isFetching ?
-                <LinearProgress style={{
-                    backgroundColor: "#303030",
-                    marginBottom: theme.spacing(2),
-                }}/> : null
+                <Preloader/> : null
             }
             <Users
                 totalUsersCount={totalUsersCount}

@@ -1,7 +1,13 @@
-import spinner from "../../../../assets/images/Spinner-1s-300px.svg";
+import {LinearProgress} from "@material-ui/core";
+import {useTheme} from "@material-ui/core/styles";
 
 export const Preloader = () => {
+    const theme = useTheme();
+
     return (
-        <img src={spinner} alt="loading"/>
+        <LinearProgress style={{
+            backgroundColor: "#303030",
+            marginBottom: theme.spacing(2),
+        }}/>
     );
 };

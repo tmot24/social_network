@@ -7,6 +7,7 @@ const useStyle = makeStyles({
     root: {
         flexDirection: "column",
         alignItems: "center",
+        flexWrap: "wrap",
     },
     cards: {
         margin: 20,
