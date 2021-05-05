@@ -1,11 +1,12 @@
 import {useState} from "react";
-import clsx from "clsx";
 import {makeStyles} from "@material-ui/core/styles";
 import {AppBar, Toolbar, Typography, IconButton, Button} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
-import {AssistantContent} from "./assistantContent";
 import {DrawerComponent} from "./drawerComponent";
 import Brightness4Icon from '@material-ui/icons/Brightness4';
+import CloseIcon from '@material-ui/icons/Close';
+import {Login} from "../login/login";
+import LoginContainer from "../login/loginContainer";
 
 export const drawerWidth = 200;
 
@@ -14,20 +15,7 @@ const useStyles = makeStyles((theme) => ({
         display: "flex",
     },
     appBar: {
-        width: "100%",
         zIndex: theme.zIndex.drawer + 1,
-        transition: theme.transitions.create(["width", "margin"], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-    },
-    appBarShift: {
-        marginLeft: drawerWidth,
-        width: `calc(100% - ${drawerWidth}px)`,
-        transition: theme.transitions.create(["width", "margin"], {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.enteringScreen,
-        }),
     },
     menuButton: {
         marginRight: 36,
@@ -37,6 +25,9 @@ const useStyles = makeStyles((theme) => ({
     },
     toolbar: {
         justifyContent: "space-between",
+    },
+    title: {
+        marginLeft: 20,
     },
     login: {
         display: "flex",
@@ -66,23 +57,18 @@ export const Header = ({isAuth, login, logout, darkMode, setDarkMode}) => {
         <div className={classes.root}>
             <AppBar
                 position="fixed"
-                className={clsx(classes.appBar, {
-                    [classes.appBarShift]: open,
-                })}
+                className={classes.appBar}
             >
                 <Toolbar className={classes.toolbar}>
-                    <IconButton
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={handleDrawerOpen}
-                        edge="start"
-                        className={clsx(classes.menuButton, {
-                            [classes.hide]: open,
-                        })}
-                    >
-                        <MenuIcon/>
-                    </IconButton>
-                    <Typography variant="h6" noWrap>
+                    {open
+                        ? <IconButton onClick={handleDrawerClose} color={"inherit"} edge="start">
+                            <CloseIcon/>
+                        </IconButton>
+                        : <IconButton color="inherit" onClick={handleDrawerOpen} edge="start">
+                            <MenuIcon/>
+                        </IconButton>
+                    }
+                    <Typography variant="h6" noWrap className={classes.title}>
                         Social network
                     </Typography>
                     <div className={classes.empty}/>
@@ -96,16 +82,13 @@ export const Header = ({isAuth, login, logout, darkMode, setDarkMode}) => {
                                     <Typography className={classes.name} variant={"h6"}>{login}</Typography>
                                     <Button color={"secondary"} variant="outlined" onClick={logout}>Log out</Button>
                                 </div>
-                                : <Button color={"secondary"} variant="outlined" onClick={logout}>
-                                    Login
-                                </Button>
+                                : <LoginContainer/>
                             }
                         </div>
                     </div>
                 </Toolbar>
             </AppBar>
             <DrawerComponent open={open} handleDrawerClose={handleDrawerClose}/>
-            <AssistantContent/>
         </div>
     );
 };

@@ -1,7 +1,7 @@
-import {LoginForm} from "./loginForm";
 import {connect} from "react-redux";
-import {login, setErrorLogin} from "../../../redux/auth-reducer";
+import {login, setErrorLogin} from "../../redux/auth-reducer";
 import {Redirect} from "react-router-dom";
+import {Login} from "./login";
 
 const LoginContainer = ({isAuth, login, errorMessage, captchaUrl}) => {
     if (isAuth) {
@@ -9,10 +9,7 @@ const LoginContainer = ({isAuth, login, errorMessage, captchaUrl}) => {
     }
 
     return (
-        <div>
-            <h1>Login</h1>
-            <LoginForm errorMessage={errorMessage} login={login} captchaUrl={captchaUrl}/>
-        </div>
+            <Login errorMessage={errorMessage} login={login} captchaUrl={captchaUrl}/>
     );
 };
 

@@ -1,11 +1,13 @@
 import clsx from "clsx";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
+import {makeStyles, useTheme} from "@material-ui/core/styles";
 import {Drawer, List, Divider, ListItem, ListItemIcon, ListItemText, IconButton} from "@material-ui/core";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import {drawerWidth} from "./header";
+import {useHistory} from "react-router-dom";
+import AccountBoxIcon from '@material-ui/icons/AccountBox';
+import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
+import GroupIcon from '@material-ui/icons/Group';
 
 const useStyles = makeStyles(theme => ({
     drawer: {
@@ -41,6 +43,7 @@ const useStyles = makeStyles(theme => ({
 export const DrawerComponent = ({handleDrawerClose, open}) => {
     const theme = useTheme();
     const classes = useStyles(theme);
+    const history = useHistory();
 
     return (
         <Drawer
@@ -58,27 +61,24 @@ export const DrawerComponent = ({handleDrawerClose, open}) => {
         >
             <div className={classes.toolbar}>
                 <IconButton onClick={handleDrawerClose}>
-                    {theme.direction === "rtl" ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                    {theme.direction === "rtl" ? <ChevronRightIcon/> : <ChevronLeftIcon/>}
                 </IconButton>
             </div>
-            <Divider />
+            <Divider/>
             <List>
-                {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
-            </List>
-            <Divider />
-            <List>
-                {["All mail", "Trash", "Spam"].map((text, index) => (
-                    <ListItem button key={text}>
-                        <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                        <ListItemText primary={text} />
-                    </ListItem>
-                ))}
+                <ListItem button onClick={() => history.push("/profile")}>
+                    <ListItemIcon><AccountBoxIcon/></ListItemIcon>
+                    <ListItemText primary={"Profile"}/>
+                </ListItem>
+                <ListItem button onClick={() => history.push("/dialogs")}>
+                    <ListItemIcon><QuestionAnswerIcon/></ListItemIcon>
+                    <ListItemText primary={"Dialogs"}/>
+                </ListItem>
+                <ListItem button onClick={() => history.push("/users")}>
+                    <ListItemIcon><GroupIcon/></ListItemIcon>
+                    <ListItemText primary={"Users"}/>
+                </ListItem>
             </List>
         </Drawer>
-    )
-}
+    );
+};
