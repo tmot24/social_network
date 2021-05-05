@@ -33,21 +33,21 @@ export const User = ({user, followingInProgress, follow, unfollow}) => {
                         title={user.name}
                     />
                     <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
+                        <Typography noWrap gutterBottom variant="h6" component="h2">
                             Name:<br/>${user.name}
                         </Typography>
-                        <Typography variant="body2" color="textSecondary" component="p">
+                        <Typography noWrap variant="body2" color="textSecondary" component="p">
                             Status: {user.status || "No status"}
                         </Typography>
                     </CardContent>
                 </CardActionArea>
                 <CardActions>
                     {user.followed
-                        ? <Button variant={"contained"} fullWidth size="small" color="primary"
+                        ? <Button variant={"contained"} fullWidth size="small"
                                   disabled={followingInProgress.some(userId => userId === user.id)}
                                   onClick={() => unfollow(user.id)}
                         >Unfollow</Button>
-                        : <Button variant={"contained"} fullWidth size="small" color="primary"
+                        : <Button variant={"contained"} fullWidth size="small"
                                   disabled={followingInProgress.some(userId => userId === user.id)}
                                   onClick={() => follow(user.id)}
                         >Follow</Button>

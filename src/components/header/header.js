@@ -5,7 +5,6 @@ import MenuIcon from "@material-ui/icons/Menu";
 import {DrawerComponent} from "./drawerComponent";
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import CloseIcon from '@material-ui/icons/Close';
-import {Login} from "../login/login";
 import LoginContainer from "../login/loginContainer";
 
 export const drawerWidth = 200;

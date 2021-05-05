@@ -4,8 +4,9 @@ import {
 } from "../../../redux/users-reducer";
 import {useEffect} from "react";
 import {Users} from "./users";
-import {Preloader} from "../common/preloader/preloader";
 import {getUsersSelector} from "./usersSelectors";
+import {LinearProgress} from "@material-ui/core";
+import {useTheme} from "@material-ui/core/styles";
 
 const UsersContainer = ({
                             follow, unfollow, users, pageSize, totalUsersCount, currentPage,
@@ -17,13 +18,20 @@ const UsersContainer = ({
         getUsersThunkCreator(currentPage, pageSize);
     }, [currentPage, getUsersThunkCreator, pageSize]);
 
+    const theme = useTheme();
+
     const onPageChanged = (pageNumber) => {
         getUsersThunkCreator(pageNumber, pageSize);
     };
 
     return (
         <>
-            {isFetching ? <Preloader/> : null}
+            {isFetching ?
+                <LinearProgress style={{
+                    backgroundColor: "#303030",
+                    marginBottom: theme.spacing(2),
+                }}/> : null
+            }
             <Users
                 totalUsersCount={totalUsersCount}
                 pageSize={pageSize}
