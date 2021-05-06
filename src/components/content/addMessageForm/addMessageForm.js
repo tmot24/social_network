@@ -1,5 +1,8 @@
 import {useForm} from "react-hook-form";
 import style from "./addMessageForm.module.css";
+import {Form, Formik, Field} from "formik";
+import {Box, Button} from "@material-ui/core";
+import {TextField} from "formik-material-ui";
 
 export const AddMessageForm = ({sendMessage, maxLength}) => {
     const {register, handleSubmit, formState: {errors}} = useForm();
@@ -19,10 +22,33 @@ export const AddMessageForm = ({sendMessage, maxLength}) => {
                           }))}/>
                 </div>
                 {errors.newMessageBody && <span>{errors.newMessageBody.message}</span>}
-                <div>
-            </div>
                 <input type="submit" value={"Send"}/>
             </div>
         </form>
+    );
+};
+
+export const AddMessageFormik = ({sendMessage}) => {
+
+    return (
+        <Formik
+            initialValues={{input: ""}}
+            onSubmit={(values => sendMessage(values.input))}
+        >
+            {({submitForm, isSubmitting}) => (
+                <Form>
+                    <Box>
+                        <Field component={TextField} name={"input"} label={"Add new post"}
+                               helperText={"Enter your message"} style={{width: 250}}>
+                        </Field>
+                        <Box style={{display: "flex", justifyContent: "flex-end"}}>
+                            <Button onClick={submitForm} disabled={isSubmitting}>
+                                Send
+                            </Button>
+                        </Box>
+                    </Box>
+                </Form>
+            )}
+        </Formik>
     );
 };

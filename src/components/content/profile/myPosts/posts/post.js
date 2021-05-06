@@ -1,15 +1,42 @@
-import style from "./post.module.css";
 import avatar from "../../../../../assets/images/avatar.svg"
+import {makeStyles, useTheme} from "@material-ui/core/styles";
+import {Card, CardContent, Typography} from "@material-ui/core";
+
+const useStyles = makeStyles(theme => ({
+    info: {
+        marginTop: theme.spacing(2),
+        marginBottom: theme.spacing(2),
+        padding: theme.spacing(2),
+
+    },
+    content: {
+        display: "flex",
+        flexDirection: "column",
+    },
+    img: {
+        height: "100px",
+        borderRadius: "50%",
+        marginBottom: theme.spacing(1),
+    }
+}));
 
 export const Post = ({message, likesCount}) => {
+    const theme = useTheme();
+    const classes = useStyles(theme);
+
     return (
-        <div className={style.item}>
-            <img src={avatar} alt="avatar"/>
-            {message}
-            <div>
-                <span>like: </span>
-                <span>{likesCount}</span>
-            </div>
-        </div>
+        <Card className={classes.info}>
+            <CardContent className={classes.content}>
+                <img className={classes.img} src={avatar} alt="avatar"/>
+                <div>
+                    <Typography variant={"body1"} align={"center"}>
+                        {message}
+                    </Typography>
+                    <Typography variant={"body2"} align={"left"}>
+                        like: {likesCount}
+                    </Typography>
+                </div>
+            </CardContent>
+        </Card>
     );
 };

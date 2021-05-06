@@ -1,15 +1,27 @@
-import style from "./myPosts.module.css";
 import {Post} from "./posts/post";
-import {AddMessageForm} from "../../addMessageForm/addMessageForm";
+import {AddMessageFormik} from "../../addMessageForm/addMessageForm";
+import {makeStyles, useTheme} from "@material-ui/core/styles";
+import {Card, CardContent, Typography} from "@material-ui/core";
+
+const useStyles = makeStyles(theme => ({
+    title: {
+        marginBottom: theme.spacing(1)
+    },
+}));
 
 export const MyPosts = ({posts, addPost}) => {
+    const theme = useTheme();
+    const classes = useStyles(theme);
+
     return (
-        <div className={style.postsBlock}>
-            <h3>My Posts</h3>
+        <div>
+            <Card >
+                <CardContent>
+                    <Typography className={classes.title} variant={"h5"}>My Posts</Typography>
+                    <AddMessageFormik sendMessage={addPost}/>
+                </CardContent>
+            </Card>
             <div>
-                <AddMessageForm sendMessage={addPost} maxLength={10}/>
-            </div>
-            <div className={style.posts}>
                 {
                     posts.map(elem => <Post key={elem.id} message={elem.message} likesCount={elem.likesCount}/>)
                 }

@@ -5,8 +5,12 @@ import {makeStyles, useTheme} from "@material-ui/core/styles";
 import {Preloader} from "../common/preloader/preloader";
 
 const useStyles = makeStyles(theme => ({
-    paper: {
+    info: {
+        margin: theme.spacing(2),
         padding: theme.spacing(2)
+    },
+    paper: {
+        margin: theme.spacing(2),
     }
 }));
 
@@ -14,19 +18,19 @@ export const Profile = ({profile, status, updateUserStatus, isOwner, savePhoto, 
     const theme = useTheme();
     const classes = useStyles(theme);
 
-    if (!profile) return <Preloader/>
+    if (!profile) return <Preloader/>;
 
     return (
         <Grid container>
             <Grid item>
-                <Paper className={classes.paper}>
+                <Paper className={classes.info}>
                     <ProfileInfo profile={profile} status={status} updateUserStatus={updateUserStatus} isOwner={isOwner}
                                  savePhoto={savePhoto}
                                  saveProfile={saveProfile}
                     />
                 </Paper>
             </Grid>
-            <Grid item>
+            <Grid item className={classes.paper}>
                 <MyPostsContainer/>
             </Grid>
         </Grid>
