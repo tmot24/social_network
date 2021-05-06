@@ -1,27 +1,26 @@
 {
   "files": {
-    "main.css": "/social_network/static/css/main.fadc7c3c.chunk.css",
-    "main.js": "/social_network/static/js/main.282d9a11.chunk.js",
-    "main.js.map": "/social_network/static/js/main.282d9a11.chunk.js.map",
-    "runtime-main.js": "/social_network/static/js/runtime-main.c07b89f9.js",
-    "runtime-main.js.map": "/social_network/static/js/runtime-main.c07b89f9.js.map",
-    "static/js/2.5493fd14.chunk.js": "/social_network/static/js/2.5493fd14.chunk.js",
-    "static/js/2.5493fd14.chunk.js.map": "/social_network/static/js/2.5493fd14.chunk.js.map",
+    "main.css": "/social_network/static/css/main.4b6f19a4.chunk.css",
+    "main.js": "/social_network/static/js/main.fe751211.chunk.js",
+    "main.js.map": "/social_network/static/js/main.fe751211.chunk.js.map",
+    "runtime-main.js": "/social_network/static/js/runtime-main.43477c58.js",
+    "runtime-main.js.map": "/social_network/static/js/runtime-main.43477c58.js.map",
+    "static/js/2.ad7828b2.chunk.js": "/social_network/static/js/2.ad7828b2.chunk.js",
+    "static/js/2.ad7828b2.chunk.js.map": "/social_network/static/js/2.ad7828b2.chunk.js.map",
     "static/css/3.1e0d8c97.chunk.css": "/social_network/static/css/3.1e0d8c97.chunk.css",
-    "static/js/3.7884e318.chunk.js": "/social_network/static/js/3.7884e318.chunk.js",
-    "static/js/3.7884e318.chunk.js.map": "/social_network/static/js/3.7884e318.chunk.js.map",
+    "static/js/3.4cd3dbc3.chunk.js": "/social_network/static/js/3.4cd3dbc3.chunk.js",
+    "static/js/3.4cd3dbc3.chunk.js.map": "/social_network/static/js/3.4cd3dbc3.chunk.js.map",
     "index.html": "/social_network/index.html",
     "static/css/3.1e0d8c97.chunk.css.map": "/social_network/static/css/3.1e0d8c97.chunk.css.map",
-    "static/css/main.fadc7c3c.chunk.css.map": "/social_network/static/css/main.fadc7c3c.chunk.css.map",
-    "static/js/2.5493fd14.chunk.js.LICENSE.txt": "/social_network/static/js/2.5493fd14.chunk.js.LICENSE.txt",
-    "static/media/Spinner-1s-300px.eadce372.svg": "/social_network/static/media/Spinner-1s-300px.eadce372.svg",
+    "static/css/main.4b6f19a4.chunk.css.map": "/social_network/static/css/main.4b6f19a4.chunk.css.map",
+    "static/js/2.ad7828b2.chunk.js.LICENSE.txt": "/social_network/static/js/2.ad7828b2.chunk.js.LICENSE.txt",
     "static/media/avatar.svg": "/social_network/static/media/avatar.4084d3ab.svg",
     "static/media/welcome-home-welcome-home-de.842af542.jpg": "/social_network/static/media/welcome-home-welcome-home-de.842af542.jpg"
   },
   "entrypoints": [
-    "static/js/runtime-main.c07b89f9.js",
-    "static/js/2.5493fd14.chunk.js",
-    "static/css/main.fadc7c3c.chunk.css",
-    "static/js/main.282d9a11.chunk.js"
+    "static/js/runtime-main.43477c58.js",
+    "static/js/2.ad7828b2.chunk.js",
+    "static/css/main.4b6f19a4.chunk.css",
+    "static/js/main.fe751211.chunk.js"
   ]
 }
