@@ -4,6 +4,7 @@ import {ProfileStatus} from "./profileStatus";
 import avatar from "../../../../assets/images/avatar.svg";
 import {useState} from "react";
 import {ProfileDataForm} from "./profileDataForm";
+import {Typography} from "@material-ui/core";
 
 
 export const ProfileInfo = ({
@@ -44,21 +45,25 @@ const ProfileData = ({profile, isOwner, goToEditMode}) => {
         <div>
             {isOwner && <button onClick={goToEditMode}>edit</button>}
             <div>
-                <b>Full name</b> {profile.fullName}
+                <Typography variant={"subtitle1"}>Full name:</Typography>
+                <Typography variant={"subtitle2"}>{profile.fullName}</Typography>
             </div>
             <div>
-                <b>Looking for a job:</b> {profile.lookingForAJob ? "yes" : "no"}
+                <Typography variant={"subtitle1"}>Looking for a job:</Typography>
+                <Typography variant={"subtitle2"}>{profile.lookingForAJob ? "yes" : "no"}</Typography>
             </div>
             {profile.lookingForAJob &&
             <div>
-                <b>My professional skills:</b> {profile.lookingForAJobDescription}
+                <Typography variant={"subtitle1"}>My professional skills:</Typography>
+                <Typography variant={"subtitle2"}>{profile.lookingForAJobDescription}</Typography>
             </div>
             }
             <div>
-                <b>About me:</b> {profile.aboutMe}
+                <Typography variant={"subtitle1"}>About me:</Typography>
+                <Typography variant={"subtitle2"}>{profile.aboutMe}</Typography>
             </div>
             <div>
-                <b>Contacts:</b>
+                <Typography variant={"subtitle1"}>Contacts:</Typography>
                 {
                     Object.keys(profile.contacts)
                         .map(key =>
@@ -74,7 +79,7 @@ const Contact = ({contactTitle, contactValue}) => {
     // if (!contactValue) return null
     return (
         <div className={style.contact}>
-            <b>{contactTitle}: </b>{contactValue}
+            <Typography variant={"subtitle1"}>{contactTitle}: </Typography>{contactValue}
         </div>
     );
 };
