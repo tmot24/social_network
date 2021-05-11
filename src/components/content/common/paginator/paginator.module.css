@@ -1,9 +1,0 @@
-.paginator {
-    display: flex;
-}
-
-.selectedPage {
-    font-weight: bold;
-    color: white;
-    background-color: #25467D;
-}

@@ -2,6 +2,8 @@ import {Paginator} from "../common/paginator/paginator";
 import {User} from "./user";
 import {Grid} from "@material-ui/core";
 import {makeStyles} from "@material-ui/core/styles";
+import React from "react";
+import {UserType} from "../../../types/typs";
 
 const useStyle = makeStyles({
     root: {
@@ -17,7 +19,18 @@ const useStyle = makeStyles({
     }
 });
 
-export const Users = ({
+type UsersType = {
+    totalUsersCount: number,
+    pageSize: number,
+    currentPage: number,
+    onPageChanged: (pageNumber: number) => void,
+    users: UserType[],
+    follow: (userId: number) => void,
+    unfollow: (userId: number) => void,
+    followingInProgress: number[],
+}
+
+export const Users: React.FC<UsersType> = ({
                           totalUsersCount, pageSize, currentPage, onPageChanged, follow, unfollow,
                           users, followingInProgress
                       }) => {
@@ -31,8 +44,8 @@ export const Users = ({
             </Grid>
             <Grid item className={classes.cards}>
                 {
-                    users.map(user => (
-                            <User key={user.id} user={user} followingInProgress={followingInProgress}
+                    users.map((user, index) => (
+                            <User key={index} user={user} followingInProgress={followingInProgress}
                                   follow={follow} unfollow={unfollow}/>
                         )
                     )

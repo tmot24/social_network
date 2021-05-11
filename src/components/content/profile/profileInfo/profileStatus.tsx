@@ -1,9 +1,17 @@
 import {Preloader} from "../../common/preloader/preloader";
-import {useEffect, useState} from "react";
+import React, {ChangeEvent, useEffect, useState} from "react";
+import {ProfileType} from "../../../../types/typs";
 
-export const ProfileStatus = ({profile, status, updateUserStatus, isOwner}) => {
+type ProfileStatusType = {
+    profile: ProfileType,
+    status: string,
+    updateUserStatus: (status: string | undefined) => void,
+    isOwner: boolean,
+}
+
+export const ProfileStatus: React.FC<ProfileStatusType> = ({profile, status, updateUserStatus, isOwner}) => {
     const [editMode, setEditMode] = useState(false);
-    const [localStatus, setLocalStatus] = useState();
+    const [localStatus, setLocalStatus] = useState<string>();
 
     useEffect(() => {
         setLocalStatus(status);
@@ -18,7 +26,7 @@ export const ProfileStatus = ({profile, status, updateUserStatus, isOwner}) => {
         updateUserStatus(localStatus);
     };
 
-    const onChange = (e) => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         setLocalStatus(e.currentTarget.value);
     };
 
@@ -29,7 +37,7 @@ export const ProfileStatus = ({profile, status, updateUserStatus, isOwner}) => {
                 ? <div>
                     <div>
                         <b>Status: </b>
-                        <span onDoubleClick={isOwner ? () => activateEditMode() : null}>{localStatus || "No status"}</span>
+                        <span onDoubleClick={isOwner ? () => activateEditMode() : undefined}>{localStatus || "No status"}</span>
                     </div>
 
                 </div>

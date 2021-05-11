@@ -1,4 +1,4 @@
-import {authAPI, securityAPI} from "../api/api";
+import {authAPI, ResultCodeForCaptcha, ResultCodesEnum, securityAPI} from "../api/api";
 
 const SET_USER_DATA = "auth/SET_USER_DATA";
 const SET_ERROR_LOGIN = "auth/SET_ERROR_LOGIN";
@@ -47,23 +47,23 @@ export const getCaptchaUrlSuccess = (captchaUrl: string) => ({type: GET_CAPTCHA_
 export const setErrorLogin = (errorMessage: string) => ({type: SET_ERROR_LOGIN, errorMessage});
 
 export const getAuthUserData = () => async (dispatch: any) => {
-    const response = await authAPI.me();
-    if (response.data.resultCode === 0) {
-        const {id, login, email} = response.data.data;
+    const meData = await authAPI.me();
+    if (meData.resultCode === ResultCodesEnum.Success) {
+        const {id, login, email} = meData.data;
         dispatch(setAuthUserData(id, email, login, true));
     }
 };
 
-export const login = (email: string, password: string, rememberMe: boolean, captcha: string) => async (dispatch: any) => {
-    const response = await authAPI.login(email, password, rememberMe, captcha);
-    if (response.data.resultCode === 0) {
+export const login = (email: string, password: string, rememberMe: boolean, captcha: string | null) => async (dispatch: any) => {
+    const loginData = await authAPI.login(email, password, rememberMe, captcha);
+    if (loginData.resultCode === ResultCodesEnum.Success) {
         // success, get auth data
         dispatch(getAuthUserData());
     } else {
-        if (response.data.resultCode === 10) {
+        if (loginData.resultCode === ResultCodeForCaptcha.CaptchaIsRequired) {
             dispatch(getCaptchaUrl());
         }
-        dispatch(setErrorLogin(response.data.messages[0]));
+        dispatch(setErrorLogin(loginData.messages[0]));
     }
 };
 
@@ -75,7 +75,7 @@ export const getCaptchaUrl = () => async (dispatch: any) => {
 
 export const logout = () => async (dispatch: any) => {
     const response = await authAPI.logout();
-    if (response.data.resultCode === 0) {
+    if (response.data.resultCode === ResultCodesEnum.Success) {
         dispatch(setAuthUserData(null, null, null, false));
     }
 };
