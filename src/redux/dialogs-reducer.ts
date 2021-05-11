@@ -20,13 +20,13 @@ const initialState = {
     ],
 };
 
-export const dialogsReducer = (state = initialState, action) => {
+export const dialogsReducer = (state = initialState, action: any) => {
     switch (action.type) {
         case SEND_MESSAGE:
             const body = action.newMessageBody;
             return {
                 ...state,
-                messages: [...state.messages, {id: 6, message: body}]
+                messages: [...state.messages, {id: 6, message: body}],
             }
 
         default:
@@ -34,4 +34,4 @@ export const dialogsReducer = (state = initialState, action) => {
     }
 };
 
-export const sendMessage = (newMessageBody) => ({type: SEND_MESSAGE, newMessageBody});
+export const sendMessage = (newMessageBody: any) => ({type: SEND_MESSAGE, newMessageBody});

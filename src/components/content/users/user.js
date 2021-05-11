@@ -34,7 +34,7 @@ export const User = ({user, followingInProgress, follow, unfollow}) => {
                     />
                     <CardContent>
                         <Typography noWrap gutterBottom variant="h6" component="h2">
-                            Name:<br/>${user.name}
+                            Name:<br/>{user.name}
                         </Typography>
                         <Typography noWrap variant="body2" color="textSecondary" component="p">
                             Status: {user.status || "No status"}
