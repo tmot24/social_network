@@ -8,15 +8,14 @@ import {Switch, TextField} from "formik-material-ui";
 
 type LoginType = {
     errorMessage: string | null,
-    login: (email: string, password: string, rememberMe: boolean, captcha: string | null) => void
-    captchaUrl: string | null
-
+    login: (email: string, password: string, rememberMe: boolean, captcha: string | undefined) => void
+    captchaUrl: string | undefined
 }
 export type LoginValuesType = {
     email: string,
     password: string,
     rememberMe: boolean,
-    captcha: string | null
+    captcha: string | undefined
 }
 
 export const Login: FC<LoginType> = ({errorMessage, login, captchaUrl}) => {
@@ -51,7 +50,7 @@ export const Login: FC<LoginType> = ({errorMessage, login, captchaUrl}) => {
                             email: "free@samuraijs.com",
                             password: "free",
                             rememberMe: false,
-                            captcha: null as string | null,
+                            captcha: undefined as string | undefined,
                         }}
                         validate={(values: LoginValuesType) => {
                             const errors: FormikErrors<LoginValuesType> = {};

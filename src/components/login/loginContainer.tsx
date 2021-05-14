@@ -13,10 +13,10 @@ const LoginContainer: FC<UsersContainerType> = ({login, errorMessage, captchaUrl
 
 type MapStateToPropsType = {
     errorMessage: string | null
-    captchaUrl: string | null
+    captchaUrl: string | undefined
 }
 type MapDispatchToPropsType = {
-    login: (email: string, password: string, rememberMe: boolean, captcha: string| null) => void
+    login: (email: string, password: string, rememberMe: boolean, captcha: string| undefined) => void
 }
 
 type UsersContainerType = MapStateToPropsType & MapDispatchToPropsType

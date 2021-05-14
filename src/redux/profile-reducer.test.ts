@@ -1,15 +1,19 @@
-import {addPost, deletePost, profileReducer} from "./profile-reducer";
+import {actions, profileReducer} from "./profile-reducer";
+import {PostType} from "../types/typs";
 
 const state = {
     posts: [
         {id: 1, message: "Hi, how are you?", likesCount: 11},
         {id: 2, message: "It's my first post", likesCount: 22},
-    ]
+    ] as Array<PostType>,
+    profile: null,
+    status: "",
+    newPostText: "",
 };
 
 it("length of posts should be incremented", () => {
     // test data
-    const action = addPost("react")
+    const action = actions.addPost("react")
     // action
     const newState = profileReducer(state, action)
     // expectation
@@ -18,7 +22,7 @@ it("length of posts should be incremented", () => {
 
 it("message of new post should be correct", () => {
 
-    const action = addPost("react")
+    const action = actions.addPost("react")
 
     const newState = profileReducer(state, action)
 
@@ -27,7 +31,7 @@ it("message of new post should be correct", () => {
 
 it("after deleting length of messages should be decremented", () => {
 
-    const action = deletePost(1)
+    const action = actions.deletePost(1)
 
     const newState = profileReducer(state, action)
 
@@ -36,7 +40,7 @@ it("after deleting length of messages should be decremented", () => {
 
 it("after deleting length of messages shouldn't be decremented if id is incorrect", () => {
 
-    const action = deletePost(-1)
+    const action = actions.deletePost(-1)
 
     const newState = profileReducer(state, action)
 
