@@ -6,7 +6,7 @@ import {BaseThunkType, InferActionsTypes} from "./redux-store";
 type InitialStateType = typeof initialState
 
 const initialState = {
-    id: null as number | null,
+    userId: null as number | null,
     email: null as string | null,
     login: null as string | null,
     isAuth: false,

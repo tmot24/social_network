@@ -7,6 +7,8 @@ import CardMedia from "@material-ui/core/CardMedia";
 import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import {makeStyles} from "@material-ui/core/styles";
+import {FC} from "react";
+import {UserType} from "../../../types/typs";
 
 const useStyles = makeStyles({
     root: {
@@ -19,7 +21,14 @@ const useStyles = makeStyles({
     },
 });
 
-export const User = ({user, followingInProgress, follow, unfollow}) => {
+type UserPropsType = {
+    unfollow: (userId: number) => void,
+    follow: (userId: number) => void,
+    followingInProgress: number[],
+    user: UserType
+}
+
+export const User: FC<UserPropsType> = ({user, followingInProgress, follow, unfollow}) => {
 
     const classes = useStyles();
 

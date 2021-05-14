@@ -12,9 +12,9 @@ const initialState = {
     newPostText: "",
 };
 
-type InitialStateType = typeof initialState;
+export type ProfileInitialStateType = typeof initialState;
 
-export const profileReducer = (state = initialState, action: ActionsType): InitialStateType => {
+export const profileReducer = (state = initialState, action: ActionsType): ProfileInitialStateType => {
     switch (action.type) {
         case "ADD_POST":
             const newPost = {
@@ -25,7 +25,6 @@ export const profileReducer = (state = initialState, action: ActionsType): Initi
             return {
                 ...state,
                 posts: [...state.posts, newPost],
-                newPostText: "",
             };
 
         case "SET_USER_PROFILE":
@@ -97,7 +96,7 @@ export const savePhoto = (file: File): ThunkType => async (dispatch) => {
 };
 
 export const saveProfile = (profile: ProfileType): ThunkType => async (dispatch, getState) => {
-    const userId = getState().auth.id;
+    const userId = getState().auth.userId;
     const data = await profileAPI.saveProfile(profile);
     if (data.resultCode === 0) {
         if (userId !== null) {

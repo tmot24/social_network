@@ -1,8 +1,14 @@
 import {useForm} from "react-hook-form";
-import style from "./profileInfo.module.css";
-import {useState} from "react";
+import React, {FC, useState} from "react";
+import {ProfileType} from "../../../../types/typs";
 
-export const ProfileDataForm = ({profile, saveProfile, setEditMode}) => {
+type ProfileDataFormPropsType = {
+    profile: ProfileType
+    saveProfile: (profile: ProfileType) => Promise<any>
+    setEditMode: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+export const ProfileDataForm: FC<ProfileDataFormPropsType> = ({profile, saveProfile, setEditMode}) => {
     const [errors, setErrors] = useState([]);
     const {register, handleSubmit} = useForm({
         defaultValues: {
@@ -22,7 +28,7 @@ export const ProfileDataForm = ({profile, saveProfile, setEditMode}) => {
             }
         }
     });
-    const onSubmit = (data) => {
+    const onSubmit = (data: ProfileType) => {
         saveProfile(data)
             .then(() => setEditMode(false))
             .catch(reject => setErrors(reject))
@@ -35,7 +41,7 @@ export const ProfileDataForm = ({profile, saveProfile, setEditMode}) => {
                     <button>save</button>
                 </div>
                 {errors.map(elem =>
-                    <div className={style.error} key={elem}>
+                    <div key={elem}>
                         {elem}
                     </div>)
                 }
@@ -55,14 +61,14 @@ export const ProfileDataForm = ({profile, saveProfile, setEditMode}) => {
                     <div>
                         <b>My professional skills: </b>
                         <div>
-                            <textarea type="text"
-                                      placeholder={"My professional skills"}{...register("lookingForAJobDescription")}/>
+                            <textarea
+                                placeholder={"My professional skills"}{...register("lookingForAJobDescription")}/>
                         </div>
                     </div>
                     <div>
                         <b>About me: </b>
                         <div>
-                            <textarea type="text" placeholder={"About me"}{...register("aboutMe")}/>
+                            <textarea placeholder={"About me"}{...register("aboutMe")}/>
                         </div>
                     </div>
                     <div>
@@ -71,9 +77,10 @@ export const ProfileDataForm = ({profile, saveProfile, setEditMode}) => {
                             {
                                 Object.keys(profile.contacts)
                                     .map(key =>
-                                        <div key={key} className={style.contact}>
+                                        <div key={key}>
                                             <b>{key}: </b>
-                                            <input type="text" placeholder={key}{...register(`contacts.${key}`)}/>
+                                            <input type="text"
+                                                   placeholder={key}{...register(`contacts.${key}` as any)}/>
                                         </div>
                                     )
                             }

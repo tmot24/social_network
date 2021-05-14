@@ -17,11 +17,7 @@ type MapStatePropsType = {
     users: UserType[],
     followingInProgress: number[],
 }
-type MapDispatchPropsType = {
-    unfollow: (userId: number) => void,
-    follow: (userId: number) => void,
-    getUsersThunkCreator: (currentPage: number, pageSize: number) => void,
-}
+
 type UsersContainerType = MapStatePropsType & MapDispatchPropsType
 
 const UsersContainer: React.FC<UsersContainerType> = ({
@@ -57,7 +53,13 @@ const UsersContainer: React.FC<UsersContainerType> = ({
     );
 };
 
-const mapStateToProps = (state: AppStateType): MapStatePropsType => {
+type MapDispatchPropsType = {
+    unfollow: (userId: number) => void,
+    follow: (userId: number) => void,
+    getUsersThunkCreator: (currentPage: number, pageSize: number) => void,
+}
+
+const mapStateToProps = (state: AppStateType) => {
     return {
         users: getUsersSelector(state),
         pageSize: state.usersPage.pageSize,
@@ -68,7 +70,7 @@ const mapStateToProps = (state: AppStateType): MapStatePropsType => {
     };
 };
 
-const mapDispatchToProps : MapDispatchPropsType = {
+const mapDispatchToProps = {
     follow, unfollow, getUsersThunkCreator,
 };
 

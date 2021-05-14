@@ -1,6 +1,7 @@
 import avatar from "../../../../../assets/images/avatar.svg"
 import {makeStyles, useTheme} from "@material-ui/core/styles";
 import {Card, CardContent, Typography} from "@material-ui/core";
+import {FC} from "react";
 
 const useStyles = makeStyles(theme => ({
     info: {
@@ -20,7 +21,12 @@ const useStyles = makeStyles(theme => ({
     }
 }));
 
-export const Post = ({message, likesCount}) => {
+type PostType = {
+    message: string
+    likesCount: number
+}
+
+export const Post: FC<PostType> = ({message, likesCount}) => {
     const theme = useTheme();
     const classes = useStyles(theme);
 

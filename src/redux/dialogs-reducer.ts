@@ -1,7 +1,7 @@
 import avatar from "../assets/images/avatar.svg"
 import {InferActionsTypes} from "./redux-store";
 
-type InitialStateType = typeof initialState
+export type DialogsInitialStateType = typeof initialState
 
 const initialState = {
     dataDialog: [
@@ -21,7 +21,7 @@ const initialState = {
     ],
 };
 
-export const dialogsReducer = (state = initialState, action: ActionsTypes): InitialStateType => {
+export const dialogsReducer = (state = initialState, action: DialogsActionsTypes): DialogsInitialStateType => {
     switch (action.type) {
         case "SEND_MESSAGE":
             const body = action.newMessageBody;
@@ -35,8 +35,8 @@ export const dialogsReducer = (state = initialState, action: ActionsTypes): Init
     }
 };
 
-type ActionsTypes = InferActionsTypes<typeof actions>
+export type DialogsActionsTypes = InferActionsTypes<typeof dialogsActions>
 
-export const actions = {
-    sendMessage: (newMessageBody: any) => ({type: "SEND_MESSAGE", newMessageBody} as const)
+export const dialogsActions = {
+    sendMessage: (newMessageBody: string) => ({type: "SEND_MESSAGE", newMessageBody} as const)
 }

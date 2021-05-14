@@ -1,19 +1,20 @@
-import style from "./dialogs.module.css";
+import {FC} from "react";
 import {DialogItem} from "./dialogItem/dialogsItem";
 import {Message} from "./message/message";
 import {AddMessageForm} from "../addMessageForm/addMessageForm";
+import {DialogsContainerType} from "./dialogs-container";
 
-export const Dialogs = ({dialogsPage, sendMessage}) => {
+export const Dialogs: FC<DialogsContainerType> = ({dialogsPage, sendMessage}) => {
     return (
-        <div className={style.dialogs}>
-            <div className={style.dialogsItems}>
+        <div>
+            <div>
                 {
                     dialogsPage.dataDialog.map(elem => <DialogItem key={elem.id} name={elem.name} id={elem.id}
                                                                    img={elem.img}/>)
                 }
             </div>
-            <div className={style.messages}>
-                <div className={style.messages}>
+            <div>
+                <div>
                     {
                         dialogsPage.messages.map(elem => <Message key={elem.id} message={elem.message}/>)
                     }

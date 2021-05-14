@@ -1,4 +1,4 @@
-import {lazy, Suspense, useState} from 'react';
+import {FC, lazy, Suspense, useState} from 'react';
 import {Route, Switch} from "react-router-dom";
 import HeaderContainer from "../header/headerContainer";
 import {useEffect} from "react";
@@ -13,10 +13,14 @@ import {CssBaseline, Grid} from "@material-ui/core";
 import {createMuiTheme} from '@material-ui/core/styles';
 import ProfileContainer from "../content/profile/profileContainer";
 import UsersContainer from "../content/users/usersContainer";
+import {AppStateType} from "../../redux/redux-store";
+import {withSuspense} from "../../hoc/withSuspense";
 
 const DialogsContainer = lazy(() => import("../content/dialogs/dialogs-container"));
+// redirect if you not authorized
+const SuspendedDialogs = withSuspense(DialogsContainer);
 
-const App = ({initialized, initializeApp}) => {
+const App: FC<MapStatePropsType & DispatchPropsType> = ({initialized, initializeApp}) => {
     const [darkMode, setDarkMode] = useState(true);
     useEffect(() => {
         initializeApp();
@@ -54,7 +58,7 @@ const App = ({initialized, initializeApp}) => {
                             <Switch>
                                 <Route path={"/"} exact component={Welcome}/>
                                 <Route path={"/profile/:userId?"} component={ProfileContainer}/>
-                                <Route path={"/dialogs"} component={DialogsContainer}/>
+                                <Route path={"/dialogs"} component={SuspendedDialogs}/>
                                 <Route path={"/users"} component={UsersContainer}/>
                                 <Route component={NotFound}/>
                             </Switch>
@@ -66,7 +70,12 @@ const App = ({initialized, initializeApp}) => {
     );
 };
 
-const mapStateToProps = (state) => {
+type MapStatePropsType = ReturnType<typeof mapStateToProps>
+type DispatchPropsType = {
+    initializeApp: () => void
+}
+
+const mapStateToProps = (state: AppStateType) => {
     return {
         initialized: state.app.initialized
     };

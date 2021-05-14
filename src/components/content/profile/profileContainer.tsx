@@ -1,22 +1,23 @@
 import {Profile} from "./profile";
 import {connect} from "react-redux";
-import {useEffect} from "react";
+import {FC, useEffect} from "react";
 import {getUserProfile, getUserStatus, savePhoto, saveProfile, updateUserStatus} from "../../../redux/profile-reducer";
 import {useParams} from "react-router-dom";
-import {compose} from "redux";
-// eslint-disable-next-line no-unused-vars
-import {withAuthRedirect} from "../../../hoc/withAuthRedirect";
+import {AppStateType} from "../../../redux/redux-store";
+import {ProfileType} from "../../../types/typs";
 
-const ProfileContainer = ({
+type ProfileContainerTypes = MapStateToPropsTypes & MapDispatchToPropsTypes
+
+const ProfileContainer: FC<ProfileContainerTypes> = ({
                               profile, status, authorizedUserId,
                               getUserProfile, getUserStatus, updateUserStatus, savePhoto, saveProfile,
                           }) => {
 
-    let userId = useParams().userId || authorizedUserId || 16528;
+    let userId = useParams<PathParamsType>().userId || authorizedUserId || 16528;
 
     useEffect(() => {
-        getUserProfile(userId);
-        getUserStatus(userId);
+        getUserProfile(+userId);
+        getUserStatus(+userId);
     }, [getUserStatus, getUserProfile, userId]);
 
     return (
@@ -27,7 +28,19 @@ const ProfileContainer = ({
     );
 };
 
-const mapStateToProps = (state) => {
+type MapStateToPropsTypes = ReturnType<typeof mapStateToProps>
+type MapDispatchToPropsTypes = {
+    getUserProfile: (userId: number) => void
+    getUserStatus: (userId: number) => void
+    updateUserStatus: (status: string) => void
+    savePhoto: (file: File) => void
+    saveProfile: (profile: ProfileType) => Promise<any>
+}
+type PathParamsType = {
+    userId: string
+}
+
+const mapStateToProps = (state: AppStateType) => {
     return {
         profile: state.profilePage.profile,
         status: state.profilePage.status,
@@ -39,4 +52,4 @@ const mapDispatchToProps = {
     getUserProfile, getUserStatus, updateUserStatus, savePhoto, saveProfile,
 };
 
-export default compose(connect(mapStateToProps, mapDispatchToProps), /*withAuthRedirect*/)(ProfileContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileContainer);

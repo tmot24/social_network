@@ -1,13 +1,21 @@
-import style from "./profileInfo.module.css";
 import {Preloader} from "../../common/preloader/preloader";
 import {ProfileStatus} from "./profileStatus";
 import avatar from "../../../../assets/images/avatar.svg";
-import {useState} from "react";
+import {ChangeEvent, FC, useState} from "react";
 import {ProfileDataForm} from "./profileDataForm";
 import {Typography} from "@material-ui/core";
+import {ContactsType, ProfileType} from "../../../../types/typs";
 
+type ProfileInfoTypes = {
+    profile: ProfileType
+    status: string
+    updateUserStatus: (status: string) => void
+    isOwner: boolean
+    savePhoto: (file: File) => void
+    saveProfile: (profile: ProfileType) => Promise<any>
+}
 
-export const ProfileInfo = ({
+export const ProfileInfo: FC<ProfileInfoTypes> = ({
                                 profile,
                                 status,
                                 updateUserStatus,
@@ -17,8 +25,8 @@ export const ProfileInfo = ({
                             }) => {
     const [editMode, setEditMode] = useState(false);
 
-    const mainPhotoSelected = (e) => {
-        if (e.target.files.length) {
+    const mainPhotoSelected = (e: ChangeEvent<HTMLInputElement>) => {
+        if (e.target.files?.length) {
             savePhoto(e.target.files[0]);
         }
     };
@@ -26,8 +34,8 @@ export const ProfileInfo = ({
     if (!profile) return <Preloader/>;
     return (
         <div>
-            <div className={style.descriptionBlock}>
-                <img className={style.avatar} src={profile.photos.large || avatar} alt="img"/>
+            <div >
+                <img  src={profile.photos.large || avatar} alt="img"/>
                 {editMode
                     ? <ProfileDataForm profile={profile} saveProfile={saveProfile} setEditMode={setEditMode}
                     />
@@ -40,7 +48,13 @@ export const ProfileInfo = ({
     );
 };
 
-const ProfileData = ({profile, isOwner, goToEditMode}) => {
+type ProfileDataTypes = {
+    profile: ProfileType
+    isOwner: boolean
+    goToEditMode: () => void
+}
+
+const ProfileData: FC<ProfileDataTypes> = ({profile, isOwner, goToEditMode}) => {
     return (
         <div>
             {isOwner && <button onClick={goToEditMode}>edit</button>}
@@ -67,7 +81,7 @@ const ProfileData = ({profile, isOwner, goToEditMode}) => {
                 {
                     Object.keys(profile.contacts)
                         .map(key =>
-                            <Contact key={key} contactTitle={key} contactValue={profile.contacts[key]}/>
+                            <Contact key={key} contactTitle={key} contactValue={profile.contacts[key as keyof ContactsType]}/>
                         )
                 }
             </div>
@@ -75,10 +89,15 @@ const ProfileData = ({profile, isOwner, goToEditMode}) => {
     );
 };
 
-const Contact = ({contactTitle, contactValue}) => {
+type ContactsPropType = {
+    contactTitle: string
+    contactValue: string
+}
+
+const Contact: FC<ContactsPropType> = ({contactTitle, contactValue}) => {
     // if (!contactValue) return null
     return (
-        <div className={style.contact}>
+        <div >
             <Typography variant={"subtitle1"}>{contactTitle}: </Typography>{contactValue}
         </div>
     );

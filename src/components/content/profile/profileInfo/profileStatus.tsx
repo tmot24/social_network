@@ -5,7 +5,7 @@ import {ProfileType} from "../../../../types/typs";
 type ProfileStatusType = {
     profile: ProfileType,
     status: string,
-    updateUserStatus: (status: string | undefined) => void,
+    updateUserStatus: (status: string) => void
     isOwner: boolean,
 }
 
@@ -23,7 +23,7 @@ export const ProfileStatus: React.FC<ProfileStatusType> = ({profile, status, upd
 
     const deactivateEditMode = () => {
         setEditMode(false);
-        updateUserStatus(localStatus);
+        updateUserStatus(localStatus as string);
     };
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {

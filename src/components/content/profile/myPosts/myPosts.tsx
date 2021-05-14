@@ -2,6 +2,8 @@ import {Post} from "./posts/post";
 import {AddMessageFormik} from "../../addMessageForm/addMessageForm";
 import {makeStyles, useTheme} from "@material-ui/core/styles";
 import {Card, CardContent, Typography} from "@material-ui/core";
+import {PostType} from "../../../../types/typs";
+import {FC} from "react";
 
 const useStyles = makeStyles(theme => ({
     title: {
@@ -9,7 +11,12 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export const MyPosts = ({posts, addPost}) => {
+type MyPostsType = {
+    posts: Array<PostType>,
+    addPost: (newPostText: string) => void
+}
+
+export const MyPosts: FC<MyPostsType> = ({posts, addPost}) => {
     const theme = useTheme();
     const classes = useStyles(theme);
 
