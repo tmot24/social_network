@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {FC, useState} from "react";
 import {makeStyles} from "@material-ui/core/styles";
 import {AppBar, Toolbar, Typography, IconButton, Button} from "@material-ui/core";
 import MenuIcon from "@material-ui/icons/Menu";
@@ -6,6 +6,7 @@ import {DrawerComponent} from "./drawerComponent";
 import Brightness4Icon from '@material-ui/icons/Brightness4';
 import CloseIcon from '@material-ui/icons/Close';
 import LoginContainer from "../login/loginContainer";
+import {HeaderContainerPropsType} from "./headerContainer";
 
 export const drawerWidth = 200;
 
@@ -40,7 +41,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
-export const Header = ({isAuth, login, logout, darkMode, setDarkMode}) => {
+
+export const Header: FC<HeaderContainerPropsType> = ({isAuth, login, logout, darkMode, setDarkMode}) => {
     const classes = useStyles();
     const [open, setOpen] = useState(false);
 

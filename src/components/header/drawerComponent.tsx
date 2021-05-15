@@ -8,6 +8,7 @@ import {useHistory} from "react-router-dom";
 import AccountBoxIcon from '@material-ui/icons/AccountBox';
 import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import GroupIcon from '@material-ui/icons/Group';
+import {FC} from "react";
 
 const useStyles = makeStyles(theme => ({
     drawer: {
@@ -40,7 +41,12 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export const DrawerComponent = ({handleDrawerClose, open}) => {
+type DrawerComponentPropsType = {
+    handleDrawerClose: () => void
+    open: boolean
+}
+
+export const DrawerComponent: FC<DrawerComponentPropsType> = ({handleDrawerClose, open}) => {
     const theme = useTheme();
     const classes = useStyles(theme);
     const history = useHistory();

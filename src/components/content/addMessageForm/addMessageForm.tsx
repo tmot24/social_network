@@ -1,21 +1,25 @@
 import {useForm} from "react-hook-form";
-import style from "./addMessageForm.module.css";
 import {Form, Formik, Field} from "formik";
 import {Box, Button} from "@material-ui/core";
 import {TextField} from "formik-material-ui";
+import {FC} from "react";
 
-export const AddMessageForm = ({sendMessage, maxLength}) => {
+type AddMessageFormPropsType = {
+    sendMessage: (text: string) => void
+    maxLength: number
+}
+
+export const AddMessageForm: FC<AddMessageFormPropsType> = ({sendMessage, maxLength}) => {
     const {register, handleSubmit, formState: {errors}} = useForm();
 
-    const onSubmit = (data) => {
+    const onSubmit = (data: { newMessageBody: string }) => {
         sendMessage(data.newMessageBody);
     };
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div className={style.formControl}>
+            <div>
                 <div>
-                <textarea className={errors.newMessageBody ? style.error : ""}
-                          type="text" placeholder={"Enter your message"}
+                <textarea placeholder={"Enter your message"}
                           {...register("newMessageBody", ({
                               required: "Field is required",
                               maxLength: {value: maxLength, message: `Max length is ${maxLength} symbols`}
@@ -28,7 +32,11 @@ export const AddMessageForm = ({sendMessage, maxLength}) => {
     );
 };
 
-export const AddMessageFormik = ({sendMessage}) => {
+type AddMessageFormikPropsType = {
+    sendMessage: (text: string) => void
+}
+
+export const AddMessageFormik: FC<AddMessageFormikPropsType> = ({sendMessage}) => {
 
     return (
         <Formik
