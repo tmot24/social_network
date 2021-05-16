@@ -64,7 +64,7 @@ export const Paginator: React.FC<PropsType> = ({
             }
             {
                 portionCount > portionNumber &&
-                <div>
+                <>
                     <IconButton onClick={() => {
                         setPortionNumber(portionNumber + 1)
                     }}>
@@ -75,7 +75,7 @@ export const Paginator: React.FC<PropsType> = ({
                     }}>
                         <LastPageIcon/>
                     </IconButton>
-                </div>
+                </>
             }
         </div>
     );

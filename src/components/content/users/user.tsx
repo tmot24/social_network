@@ -38,7 +38,7 @@ export const User: FC<UserPropsType> = ({user, followingInProgress, follow, unfo
                 <CardActionArea component={NavLink} to={`/profile/${user.id}`}>
                     <CardMedia
                         className={classes.media}
-                        image={user.photos.small ? user.photos.small : avatar}
+                        image={user.photos.large ? user.photos.large : avatar}
                         title={user.name}
                     />
                     <CardContent>
