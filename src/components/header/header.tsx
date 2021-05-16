@@ -1,14 +1,15 @@
-import {FC, useState} from "react";
-import {makeStyles} from "@material-ui/core/styles";
-import {AppBar, Toolbar, Typography, IconButton, Button} from "@material-ui/core";
-import MenuIcon from "@material-ui/icons/Menu";
-import {DrawerComponent} from "./drawerComponent";
-import Brightness4Icon from '@material-ui/icons/Brightness4';
-import CloseIcon from '@material-ui/icons/Close';
-import LoginContainer from "../login/loginContainer";
-import {HeaderContainerPropsType} from "./headerContainer";
+import {FC, useState} from "react"
+import {makeStyles} from "@material-ui/core/styles"
+import {AppBar, Toolbar, Typography, IconButton, Button} from "@material-ui/core"
+import MenuIcon from "@material-ui/icons/Menu"
+import {DrawerComponent} from "./drawerComponent"
+import Brightness4Icon from "@material-ui/icons/Brightness4"
+import CloseIcon from "@material-ui/icons/Close"
+import LoginContainer from "../login/loginContainer"
+import {HeaderContainerPropsType} from "./headerContainer"
+import {useHistory} from "react-router-dom"
 
-export const drawerWidth = 200;
+export const drawerWidth = 200
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -28,6 +29,8 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         marginLeft: 20,
+        color: "black",
+        cursor: "pointer",
     },
     login: {
         display: "flex",
@@ -38,21 +41,22 @@ const useStyles = makeStyles((theme) => ({
     },
     name: {
         marginRight: 12,
-    }
-}));
+    },
+}))
 
 
 export const Header: FC<HeaderContainerPropsType> = ({isAuth, login, logout, darkMode, setDarkMode}) => {
-    const classes = useStyles();
-    const [open, setOpen] = useState(false);
+    const classes = useStyles()
+    const [open, setOpen] = useState(false)
+    const history = useHistory()
 
     const handleDrawerOpen = () => {
-        setOpen(true);
-    };
+        setOpen(true)
+    }
 
     const handleDrawerClose = () => {
-        setOpen(false);
-    };
+        setOpen(false)
+    }
 
     return (
         <div className={classes.root}>
@@ -69,7 +73,7 @@ export const Header: FC<HeaderContainerPropsType> = ({isAuth, login, logout, dar
                             <MenuIcon/>
                         </IconButton>
                     }
-                    <Typography variant="h6" noWrap className={classes.title}>
+                    <Typography onClick={() => history.push("/")} variant="h6" noWrap className={classes.title}>
                         Social network
                     </Typography>
                     <div className={classes.empty}/>
@@ -91,5 +95,5 @@ export const Header: FC<HeaderContainerPropsType> = ({isAuth, login, logout, dar
             </AppBar>
             <DrawerComponent open={open} handleDrawerClose={handleDrawerClose}/>
         </div>
-    );
-};
+    )
+}
