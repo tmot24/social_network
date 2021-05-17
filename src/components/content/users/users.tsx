@@ -2,10 +2,15 @@ import {Paginator} from "../common/paginator/paginator"
 import {User} from "./user"
 import {Grid} from "@material-ui/core"
 import {makeStyles} from "@material-ui/core/styles"
-import React from "react"
-import {UserType} from "../../../types/typs"
+import React, {useEffect} from "react"
 import {UsersSearchForm} from "./usersSearchForm"
-import {FilterType} from "../../../redux/users-reducer"
+import {FilterType, getUsersThunkCreator, followThunk, unfollowThunk} from "../../../redux/users-reducer"
+import {useDispatch, useSelector} from "react-redux"
+import {
+    getCurrentPage, getFollowingInProgress,
+    getPageSize,
+    getTotalUsersCount, getUsers, getUsersFilter,
+} from "../../../redux/selectors/usersSelectors"
 
 const useStyle = makeStyles({
     root: {
@@ -21,22 +26,33 @@ const useStyle = makeStyles({
     },
 })
 
-type UsersType = {
-    totalUsersCount: number,
-    pageSize: number,
-    currentPage: number,
-    onPageChanged: (pageNumber: number) => void,
-    users: UserType[],
-    follow: (userId: number) => void,
-    unfollow: (userId: number) => void,
-    followingInProgress: number[],
-    onFilterChanged: (filter: FilterType) => void
-}
+export const Users = React.memo(() => {
 
-export const Users: React.FC<UsersType> = React.memo(({
-                                               totalUsersCount, pageSize, currentPage, onPageChanged, follow, unfollow,
-                                               users, followingInProgress, onFilterChanged,
-                                           }) => {
+    const users = useSelector(getUsers)
+    const pageSize = useSelector(getPageSize)
+    const totalUsersCount = useSelector(getTotalUsersCount)
+    const currentPage = useSelector(getCurrentPage)
+    const filter = useSelector(getUsersFilter)
+    const followingInProgress = useSelector(getFollowingInProgress)
+
+    const dispatch = useDispatch()
+
+    useEffect(() => {
+        dispatch(getUsersThunkCreator(currentPage, pageSize, filter))
+    }, [currentPage, dispatch, filter, pageSize])
+
+    const onPageChanged = (currentPage: number) => {
+        dispatch(getUsersThunkCreator(currentPage, pageSize, filter))
+    }
+    const onFilterChanged = (filter: FilterType) => {
+        dispatch(getUsersThunkCreator(1, pageSize, filter))
+    }
+    const follow = (userId: number) => {
+        dispatch(followThunk(userId))
+    }
+    const unfollow = (userId: number) => {
+        dispatch(unfollowThunk(userId))
+    }
     const classes = useStyle()
 
     return (

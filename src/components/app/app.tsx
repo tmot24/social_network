@@ -12,7 +12,7 @@ import {ThemeProvider} from "@material-ui/core/styles";
 import {CssBaseline, Grid} from "@material-ui/core";
 import {createMuiTheme} from '@material-ui/core/styles';
 import ProfileContainer from "../content/profile/profileContainer";
-import UsersContainer from "../content/users/usersContainer";
+import {UsersContainer} from "../content/users/usersContainer";
 import {AppStateType} from "../../redux/redux-store";
 import {withSuspense} from "../../hoc/withSuspense";
 

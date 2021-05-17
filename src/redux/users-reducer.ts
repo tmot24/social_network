@@ -7,7 +7,7 @@ import {APIResponseType} from "../api/api"
 
 const initialState = {
     users: [] as UserType[],
-    pageSize: 100,
+    pageSize: 10,
     totalUsersCount: 0,
     currentPage: 1,
     isFetching: true,
@@ -118,13 +118,13 @@ const _followUnfollowFlow = async (dispatch: DispatchType, userId: number, apiMe
     dispatch(actions.toggleFollowingProgress(false, userId))
 }
 
-export const follow = (userId: number): ThunkType => {
+export const followThunk = (userId: number): ThunkType => {
     return async (dispatch) => {
         await _followUnfollowFlow(dispatch, userId, usersAPI.follow, actions.followSuccess)
     }
 }
 
-export const unfollow = (userId: number): ThunkType => {
+export const unfollowThunk = (userId: number): ThunkType => {
     return async (dispatch) => {
         await _followUnfollowFlow(dispatch, userId, usersAPI.unfollow, actions.unfollowSuccess)
     }

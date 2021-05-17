@@ -1,35 +1,20 @@
-import {FC} from "react";
-import {connect} from "react-redux";
-import {login} from "../../redux/auth-reducer";
-import {Login} from "./login";
-import {AppStateType} from "../../redux/redux-store";
+import {useDispatch, useSelector} from "react-redux"
+import {login} from "../../redux/auth-reducer"
+import {Login, LoginValuesType} from "./login"
+import {AppStateType} from "../../redux/redux-store"
 
-const LoginContainer: FC<UsersContainerType> = ({login, errorMessage, captchaUrl}) => {
+export const LoginContainer = () => {
+
+    const captchaUrl = useSelector((state: AppStateType) => state.auth.captchaUrl)
+    const errorMessage = useSelector((state: AppStateType) => state.auth.errorMessage)
+
+    const dispatch = useDispatch()
+
+    const onSubmit = (data: LoginValuesType) => {
+        dispatch(login(data.email, data.password, data.rememberMe, data.captcha))
+    }
 
     return (
-        <Login errorMessage={errorMessage} login={login} captchaUrl={captchaUrl}/>
+        <Login errorMessage={errorMessage} onSubmit={onSubmit} captchaUrl={captchaUrl}/>
     )
-};
-
-type MapStateToPropsType = {
-    errorMessage: string | null
-    captchaUrl: string | undefined
 }
-type MapDispatchToPropsType = {
-    login: (email: string, password: string, rememberMe: boolean, captcha: string| undefined) => void
-}
-
-type UsersContainerType = MapStateToPropsType & MapDispatchToPropsType
-
-const mapStateToProps = (state: AppStateType): MapStateToPropsType => {
-    return {
-        errorMessage: state.auth.errorMessage,
-        captchaUrl: state.auth.captchaUrl,
-    };
-};
-
-const mapDispatchToProps: MapDispatchToPropsType = {
-    login,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);

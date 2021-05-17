@@ -5,7 +5,7 @@ import MenuIcon from "@material-ui/icons/Menu"
 import {DrawerComponent} from "./drawerComponent"
 import Brightness4Icon from "@material-ui/icons/Brightness4"
 import CloseIcon from "@material-ui/icons/Close"
-import LoginContainer from "../login/loginContainer"
+import {LoginContainer} from "../login/loginContainer"
 import {HeaderContainerPropsType} from "./headerContainer"
 import {useHistory} from "react-router-dom"
 

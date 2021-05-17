@@ -8,8 +8,8 @@ import {Switch, TextField} from "formik-material-ui";
 
 type LoginType = {
     errorMessage: string | null,
-    login: (email: string, password: string, rememberMe: boolean, captcha: string | undefined) => void
     captchaUrl: string | undefined
+    onSubmit: (data: LoginValuesType) => void
 }
 export type LoginValuesType = {
     email: string,
@@ -18,12 +18,8 @@ export type LoginValuesType = {
     captcha: string | undefined
 }
 
-export const Login: FC<LoginType> = ({errorMessage, login, captchaUrl}) => {
+export const Login: FC<LoginType> = ({errorMessage, onSubmit, captchaUrl}) => {
     const [open, setOpen] = useState(false);
-
-    const onSubmit = (data: LoginValuesType) => {
-        login(data.email, data.password, data.rememberMe, data.captcha);
-    };
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -63,7 +59,7 @@ export const Login: FC<LoginType> = ({errorMessage, login, captchaUrl}) => {
                             }
                             return errors;
                         }}
-                        onSubmit={values => onSubmit(values)}
+                        onSubmit={onSubmit}
                     >
                         <Form>
                             <Box margin={1}>
