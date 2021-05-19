@@ -16,11 +16,11 @@ import {UsersContainer} from "../content/users/usersContainer"
 import {AppStateType} from "../../redux/redux-store"
 import {withSuspense} from "../../hoc/withSuspense"
 
-const DialogsContainer = lazy(() => import("../content/dialogs/dialogs-container"))
-const ChatPage = lazy(() => import("../../pages/chat/ChatPage"))
+// const DialogsContainer = lazy(() => import("../content/dialogs/dialogs-container"))
+const Chat = lazy(() => import("../content/chat/Chat"))
 // for lazy loading
-const SuspendedDialogs = withSuspense(DialogsContainer)
-const SuspendedChatPage = withSuspense(ChatPage)
+// const SuspendedDialogs = withSuspense(DialogsContainer)
+const SuspendedChatPage = withSuspense(Chat)
 
 const App: FC<MapStatePropsType & DispatchPropsType> = ({initialized, initializeApp}) => {
     const [darkMode, setDarkMode] = useState(true)
@@ -60,7 +60,7 @@ const App: FC<MapStatePropsType & DispatchPropsType> = ({initialized, initialize
                             <Switch>
                                 <Route path={"/"} exact component={Welcome}/>
                                 <Route path={"/profile/:userId?"} component={ProfileContainer}/>
-                                <Route path={"/dialogs"} component={SuspendedDialogs}/>
+                                {/*<Route path={"/dialogs"} component={SuspendedDialogs}/>*/}
                                 <Route path={"/users"} component={UsersContainer}/>
                                 <Route path={"/chat"} component={SuspendedChatPage}/>
                                 <Route component={NotFound}/>

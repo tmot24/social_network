@@ -1,14 +1,14 @@
-import clsx from "clsx";
-import {makeStyles, useTheme} from "@material-ui/core/styles";
-import {Drawer, List, Divider, ListItem, ListItemIcon, ListItemText, IconButton} from "@material-ui/core";
-import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import {drawerWidth} from "./header";
-import {useHistory} from "react-router-dom";
-import AccountBoxIcon from '@material-ui/icons/AccountBox';
-import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
-import GroupIcon from '@material-ui/icons/Group';
-import {FC} from "react";
+import clsx from "clsx"
+import {makeStyles, useTheme} from "@material-ui/core/styles"
+import {Divider, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText} from "@material-ui/core"
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft"
+import ChevronRightIcon from "@material-ui/icons/ChevronRight"
+import {drawerWidth} from "./header"
+import {useHistory} from "react-router-dom"
+import AccountBoxIcon from "@material-ui/icons/AccountBox"
+import QuestionAnswerIcon from "@material-ui/icons/QuestionAnswer"
+import GroupIcon from "@material-ui/icons/Group"
+import {FC} from "react"
 
 const useStyles = makeStyles(theme => ({
     drawer: {
@@ -76,10 +76,6 @@ export const DrawerComponent: FC<DrawerComponentPropsType> = ({handleDrawerClose
                     <ListItemIcon><AccountBoxIcon/></ListItemIcon>
                     <ListItemText primary={"Profile"}/>
                 </ListItem>
-                <ListItem button onClick={() => history.push("/dialogs")}>
-                    <ListItemIcon><QuestionAnswerIcon/></ListItemIcon>
-                    <ListItemText primary={"Dialogs"}/>
-                </ListItem>
                 <ListItem button onClick={() => history.push("/users")}>
                     <ListItemIcon><GroupIcon/></ListItemIcon>
                     <ListItemText primary={"Users"}/>
@@ -88,6 +84,10 @@ export const DrawerComponent: FC<DrawerComponentPropsType> = ({handleDrawerClose
                     <ListItemIcon><QuestionAnswerIcon/></ListItemIcon>
                     <ListItemText primary={"Chat"}/>
                 </ListItem>
+                {/*                <ListItem button onClick={() => history.push("/dialogs")}>
+                    <ListItemIcon><QuestionAnswerIcon/></ListItemIcon>
+                    <ListItemText primary={"Dialogs"}/>
+                </ListItem>*/}
             </List>
         </Drawer>
     );
