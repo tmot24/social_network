@@ -6,8 +6,6 @@ import {FilterType} from "../../../redux/users-reducer"
 import {FC} from "react"
 import {Select} from "formik-material-ui"
 
-
-
 const useStyles = makeStyles((theme) => ({
     root: {
         margin: theme.spacing(2),

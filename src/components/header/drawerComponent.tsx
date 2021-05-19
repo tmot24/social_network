@@ -84,6 +84,10 @@ export const DrawerComponent: FC<DrawerComponentPropsType> = ({handleDrawerClose
                     <ListItemIcon><GroupIcon/></ListItemIcon>
                     <ListItemText primary={"Users"}/>
                 </ListItem>
+                <ListItem button onClick={() => history.push("/chat")}>
+                    <ListItemIcon><QuestionAnswerIcon/></ListItemIcon>
+                    <ListItemText primary={"Chat"}/>
+                </ListItem>
             </List>
         </Drawer>
     );

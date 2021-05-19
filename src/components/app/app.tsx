@@ -1,30 +1,32 @@
-import {FC, lazy, Suspense, useState} from 'react';
-import {Route, Switch} from "react-router-dom";
-import HeaderContainer from "../header/headerContainer";
-import {useEffect} from "react";
-import {connect} from "react-redux";
-import {initializeApp} from "../../redux/app-reducer";
-import {Preloader} from "../content/common/preloader/preloader";
-import {Welcome} from "../content/welcome/welcome";
-import {NotFound} from "../content/notFound/notFound";
-import ErrorBoundary from "../content/errorBoundary/errorBoundary";
-import {ThemeProvider} from "@material-ui/core/styles";
-import {CssBaseline, Grid} from "@material-ui/core";
-import {createMuiTheme} from '@material-ui/core/styles';
-import ProfileContainer from "../content/profile/profileContainer";
-import {UsersContainer} from "../content/users/usersContainer";
-import {AppStateType} from "../../redux/redux-store";
-import {withSuspense} from "../../hoc/withSuspense";
+import {FC, lazy, Suspense, useState} from "react"
+import {Route, Switch} from "react-router-dom"
+import HeaderContainer from "../header/headerContainer"
+import {useEffect} from "react"
+import {connect} from "react-redux"
+import {initializeApp} from "../../redux/app-reducer"
+import {Preloader} from "../content/common/preloader/preloader"
+import {Welcome} from "../content/welcome/welcome"
+import {NotFound} from "../content/notFound/notFound"
+import ErrorBoundary from "../content/errorBoundary/errorBoundary"
+import {ThemeProvider} from "@material-ui/core/styles"
+import {CssBaseline, Grid} from "@material-ui/core"
+import {createMuiTheme} from "@material-ui/core/styles"
+import ProfileContainer from "../content/profile/profileContainer"
+import {UsersContainer} from "../content/users/usersContainer"
+import {AppStateType} from "../../redux/redux-store"
+import {withSuspense} from "../../hoc/withSuspense"
 
-const DialogsContainer = lazy(() => import("../content/dialogs/dialogs-container"));
-// redirect if you not authorized
-const SuspendedDialogs = withSuspense(DialogsContainer);
+const DialogsContainer = lazy(() => import("../content/dialogs/dialogs-container"))
+const ChatPage = lazy(() => import("../../pages/chat/ChatPage"))
+// for lazy loading
+const SuspendedDialogs = withSuspense(DialogsContainer)
+const SuspendedChatPage = withSuspense(ChatPage)
 
 const App: FC<MapStatePropsType & DispatchPropsType> = ({initialized, initializeApp}) => {
-    const [darkMode, setDarkMode] = useState(true);
+    const [darkMode, setDarkMode] = useState(true)
     useEffect(() => {
-        initializeApp();
-    }, [initializeApp]);
+        initializeApp()
+    }, [initializeApp])
 
     const theme = createMuiTheme({
         palette: {
@@ -33,18 +35,18 @@ const App: FC<MapStatePropsType & DispatchPropsType> = ({initialized, initialize
                 main: "#FFFFFFFF",
             },
             secondary: {
-                main: "#000000FF"
+                main: "#000000FF",
             },
-        }
-    });
+        },
+    })
 
     const preloader = (
         <div className={"app-wrapper"}>
             <Preloader/>
         </div>
-    );
+    )
 
-    if (!initialized) return preloader;
+    if (!initialized) return preloader
     return (
         <ThemeProvider theme={theme}>
             <CssBaseline/>
@@ -60,6 +62,7 @@ const App: FC<MapStatePropsType & DispatchPropsType> = ({initialized, initialize
                                 <Route path={"/profile/:userId?"} component={ProfileContainer}/>
                                 <Route path={"/dialogs"} component={SuspendedDialogs}/>
                                 <Route path={"/users"} component={UsersContainer}/>
+                                <Route path={"/chat"} component={SuspendedChatPage}/>
                                 <Route component={NotFound}/>
                             </Switch>
                         </Suspense>
@@ -67,8 +70,8 @@ const App: FC<MapStatePropsType & DispatchPropsType> = ({initialized, initialize
                 </ErrorBoundary>
             </Grid>
         </ThemeProvider>
-    );
-};
+    )
+}
 
 type MapStatePropsType = ReturnType<typeof mapStateToProps>
 type DispatchPropsType = {
@@ -77,12 +80,12 @@ type DispatchPropsType = {
 
 const mapStateToProps = (state: AppStateType) => {
     return {
-        initialized: state.app.initialized
-    };
-};
+        initialized: state.app.initialized,
+    }
+}
 
 const mapDispatchToProps = {
     initializeApp,
-};
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App)
