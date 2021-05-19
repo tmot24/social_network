@@ -1,6 +1,7 @@
 import {Preloader} from "../../common/preloader/preloader";
 import React, {ChangeEvent, useEffect, useState} from "react";
 import {ProfileType} from "../../../../types/typs";
+import {Box, Typography} from "@material-ui/core"
 
 type ProfileStatusType = {
     profile: ProfileType,
@@ -32,12 +33,12 @@ export const ProfileStatus: React.FC<ProfileStatusType> = ({profile, status, upd
 
     if (!profile) return <Preloader/>;
     return (
-        <div>
+        <>
+            <Typography onDoubleClick={isOwner ? () => activateEditMode() : undefined} variant={"h6"}>Status: </Typography>
             {!editMode
                 ? <div>
                     <div>
-                        <b>Status: </b>
-                        <span onDoubleClick={isOwner ? () => activateEditMode() : undefined}>{localStatus || "No status"}</span>
+                        <Box fontStyle={"italic"} onDoubleClick={isOwner ? () => activateEditMode() : undefined}>{localStatus || "No status"}</Box>
                     </div>
 
                 </div>
@@ -47,6 +48,6 @@ export const ProfileStatus: React.FC<ProfileStatusType> = ({profile, status, upd
                            type="text" defaultValue={localStatus}/>
                 </div>
             }
-        </div>
+        </>
     );
 };

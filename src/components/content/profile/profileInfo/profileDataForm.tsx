@@ -5,10 +5,10 @@ import {ProfileType} from "../../../../types/typs";
 type ProfileDataFormPropsType = {
     profile: ProfileType
     saveProfile: (profile: ProfileType) => Promise<any>
-    setEditMode: React.Dispatch<React.SetStateAction<boolean>>
+    handleToggle: React.Dispatch<React.SetStateAction<boolean>>
 }
 
-export const ProfileDataForm: FC<ProfileDataFormPropsType> = ({profile, saveProfile, setEditMode}) => {
+export const ProfileDataForm: FC<ProfileDataFormPropsType> = ({profile, saveProfile, handleToggle}) => {
     const [errors, setErrors] = useState([]);
     const {register, handleSubmit} = useForm({
         defaultValues: {
@@ -30,7 +30,7 @@ export const ProfileDataForm: FC<ProfileDataFormPropsType> = ({profile, saveProf
     });
     const onSubmit = (data: ProfileType) => {
         saveProfile(data)
-            .then(() => setEditMode(false))
+            .then(() => handleToggle)
             .catch(reject => setErrors(reject))
 
     };

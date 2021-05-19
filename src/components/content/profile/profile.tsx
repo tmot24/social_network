@@ -1,10 +1,9 @@
 import {ProfileInfo} from "./profileInfo/profileInfo";
-import MyPostsContainer from "./myPosts/myPostsContainer";
-import {Grid, Paper} from "@material-ui/core";
+import {Grid, Paper, Typography} from "@material-ui/core"
 import {makeStyles, useTheme} from "@material-ui/core/styles";
 import {Preloader} from "../common/preloader/preloader";
 import {ProfileType} from "../../../types/typs";
-import {FC} from "react";
+import React, {FC} from "react";
 
 const useStyles = makeStyles(theme => ({
     info: {
@@ -13,7 +12,12 @@ const useStyles = makeStyles(theme => ({
     },
     paper: {
         margin: theme.spacing(2),
-    }
+    },
+    root: {
+        margin: theme.spacing(2),
+        padding: theme.spacing(2),
+        flexDirection: "row"
+    },
 }));
 
 type ProfilePropsTypes = {
@@ -33,7 +37,7 @@ export const Profile: FC<ProfilePropsTypes> = ({profile, status, updateUserStatu
 
     return (
         <Grid container>
-            <Grid item>
+            <Grid item sm={5} xs={12} >
                 <Paper className={classes.info}>
                     <ProfileInfo profile={profile} status={status} updateUserStatus={updateUserStatus} isOwner={isOwner}
                                  savePhoto={savePhoto}
@@ -41,9 +45,17 @@ export const Profile: FC<ProfilePropsTypes> = ({profile, status, updateUserStatu
                     />
                 </Paper>
             </Grid>
-            <Grid item className={classes.paper}>
-                <MyPostsContainer/>
+            <Grid item sm={7} xs={12}>
+                <Paper className={classes.root}>
+                    <Typography variant={"h6"}>
+                        Чат реализован с помощью WebSocket. Вы можете продублировать вкладку сайта и пообщаться с самим
+                        собой &#128512;
+                    </Typography>
+                </Paper>
             </Grid>
+{/*            <Grid item className={classes.paper}>
+                <MyPostsContainer/>
+            </Grid>*/}
         </Grid>
     );
 };
