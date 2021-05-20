@@ -1,15 +1,31 @@
-import {useForm} from "react-hook-form";
-import React, {FC, useState} from "react";
-import {ProfileType} from "../../../../types/typs";
+import {useForm} from "react-hook-form"
+import React, {FC, useState} from "react"
+import {ProfileType} from "../../../../types/typs"
+import {Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography} from "@material-ui/core"
+import {makeStyles, useTheme} from "@material-ui/core/styles"
 
 type ProfileDataFormPropsType = {
     profile: ProfileType
     saveProfile: (profile: ProfileType) => Promise<any>
-    handleToggle: React.Dispatch<React.SetStateAction<boolean>>
+    handleClose: () => void
 }
 
-export const ProfileDataForm: FC<ProfileDataFormPropsType> = ({profile, saveProfile, handleToggle}) => {
-    const [errors, setErrors] = useState([]);
+const useStyles = makeStyles(theme => ({
+    title: {
+        margin: theme.spacing(3),
+    },
+    errors: {
+        color: "red",
+    },
+    buttons: {
+        display: "flex",
+        justifyContent: "space-between",
+    },
+}))
+
+
+export const ProfileDataForm: FC<ProfileDataFormPropsType> = ({profile, saveProfile, handleClose}) => {
+    const [errors, setErrors] = useState([])
     const {register, handleSubmit} = useForm({
         defaultValues: {
             fullName: profile.fullName,
@@ -25,69 +41,91 @@ export const ProfileDataForm: FC<ProfileDataFormPropsType> = ({profile, saveProf
                 youtube: profile.contacts.youtube,
                 github: profile.contacts.github,
                 mainLink: profile.contacts.mainLink,
-            }
-        }
-    });
+            },
+        },
+    })
+    const theme = useTheme()
+    const classes = useStyles(theme)
+
     const onSubmit = (data: ProfileType) => {
         saveProfile(data)
-            .then(() => handleToggle)
+            .then(() => {
+                handleClose()
+                setErrors([])
+            })
             .catch(reject => setErrors(reject))
 
-    };
+    }
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div>
-                <div>
-                    <button>save</button>
-                </div>
+            <TableContainer component={Paper}>
+                <Typography className={classes.title} variant={"h4"} align={"center"}>Edit profile info</Typography>
                 {errors.map(elem =>
-                    <div key={elem}>
+                    <Typography align={"center"} className={classes.errors} key={elem}>
                         {elem}
-                    </div>)
+                    </Typography>)
                 }
-                <div>
-                    <div>
-                        <b>Full name: </b>
-                        <div>
-                            <input type="text" placeholder={"Full name"}{...register("fullName")}/>
-                        </div>
-                    </div>
-                    <div>
-                        <b>Looking for a job: </b>
-                        <div>
-                            <input type="checkbox" {...register("lookingForAJob")}/>
-                        </div>
-                    </div>
-                    <div>
-                        <b>My professional skills: </b>
-                        <div>
-                            <textarea
-                                placeholder={"My professional skills"}{...register("lookingForAJobDescription")}/>
-                        </div>
-                    </div>
-                    <div>
-                        <b>About me: </b>
-                        <div>
-                            <textarea placeholder={"About me"}{...register("aboutMe")}/>
-                        </div>
-                    </div>
-                    <div>
-                        <b>Contacts: </b>
-                        <div>
-                            {
-                                Object.keys(profile.contacts)
-                                    .map(key =>
-                                        <div key={key}>
-                                            <b>{key}: </b>
+                <Table size="small">
+                    <TableBody>
+                        <TableRow>
+                            <TableCell>
+                                Full name
+                            </TableCell>
+                            <TableCell align="right">
+                                <input type="text" placeholder={"Full name"}{...register("fullName")}/>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                Looking for a job
+                            </TableCell>
+                            <TableCell align="right">
+                                <input type="checkbox" {...register("lookingForAJob")}/>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                My professional skills
+                            </TableCell>
+                            <TableCell align="right">
+                                <textarea
+                                    placeholder={"My professional skills"}{...register("lookingForAJobDescription")}/>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                About me
+                            </TableCell>
+                            <TableCell align="right">
+                                <textarea placeholder={"About me"}{...register("aboutMe")}/>
+                            </TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>
+                                <Typography align={"center"}>Contacts</Typography>
+                            </TableCell>
+                        </TableRow>
+                        {
+                            Object.keys(profile.contacts)
+                                .map(key =>
+                                    <TableRow key={key}>
+                                        <TableCell>
+                                            {key}
+                                        </TableCell>
+                                        <TableCell align="right">
                                             <input type="text"
                                                    placeholder={key}{...register(`contacts.${key}` as any)}/>
-                                        </div>
-                                    )
-                            }
-                        </div>
-                    </div>
-                </div>
-            </div>
+                                        </TableCell>
+                                    </TableRow>,
+                                )
+                        }
+                    </TableBody>
+                </Table>
+                <Box margin={2} className={classes.buttons}>
+                    <Button onClick={handleClose}>Cancel</Button>
+                    <Button type={"submit"}>Send</Button>
+                </Box>
+            </TableContainer>
         </form>
-    );
-};
+    )
+}

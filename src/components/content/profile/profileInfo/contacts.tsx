@@ -1,10 +1,9 @@
 import {ContactsType, ProfileType} from "../../../../types/typs"
 import {FC} from "react"
-import {Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography} from "@material-ui/core"
+import {Paper, Table, TableBody, TableCell, TableContainer, TableRow} from "@material-ui/core"
 
 export const Contacts: FC<{ profile: ProfileType }> = ({profile}) => {
 
-    console.log(profile)
     return (
         <>
             {
