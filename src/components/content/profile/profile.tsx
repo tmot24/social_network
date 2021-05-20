@@ -40,7 +40,7 @@ export const Profile: FC<ProfilePropsTypes> = ({profile, status, updateUserStatu
 
     return (
         <Grid container>
-            <Grid item sm={7} xs={12} >
+            <Grid item sm={6} xs={12} >
                 <Paper className={classes.info}>
                     <ProfileInfo profile={profile} status={status} updateUserStatus={updateUserStatus} isOwner={isOwner}
                                  savePhoto={savePhoto}
@@ -48,7 +48,7 @@ export const Profile: FC<ProfilePropsTypes> = ({profile, status, updateUserStatu
                     />
                 </Paper>
             </Grid>
-            <Grid item sm={5} xs={12}>
+            <Grid item sm={6} xs={12}>
                 <Paper className={classes.root}>
                     <Typography variant={"h6"}>
                         После авторизации, вы можете изменить:

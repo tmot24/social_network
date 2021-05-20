@@ -9,9 +9,10 @@ import {Select} from "formik-material-ui"
 const useStyles = makeStyles((theme) => ({
     root: {
         margin: theme.spacing(2),
+        width: 500,
     },
     select: {
-        width: 141
+        width: 141,
     },
     search: {
         position: "relative",
