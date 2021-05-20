@@ -26,7 +26,7 @@ type ContactsPropType = {
 const Contact: FC<ContactsPropType> = ({contactTitle, contactValue}) => {
     // if (!contactValue) return null
     return (
-        <TableContainer component={Paper}>
+        <TableContainer component={Paper} style={{minWidth: 327}}>
             <Table>
                 <TableBody>
                     <TableRow>

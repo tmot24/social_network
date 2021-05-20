@@ -16,7 +16,7 @@ export const ProfileData: FC<ProfileDataTypes> = ({profile}) => {
 
     return (
         <div>
-            <TableContainer component={Paper}>
+            <TableContainer component={Paper} style={{minWidth: 327}}>
                 <Table>
                     <TableBody>
                         {
