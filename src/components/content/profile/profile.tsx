@@ -1,9 +1,12 @@
 import {ProfileInfo} from "./profileInfo/profileInfo";
-import {Grid, Paper, Typography} from "@material-ui/core"
+import {Grid, List, ListItem, ListItemIcon, ListItemText, Paper, Typography} from "@material-ui/core"
 import {makeStyles, useTheme} from "@material-ui/core/styles";
 import {Preloader} from "../common/preloader/preloader";
 import {ProfileType} from "../../../types/typs";
 import React, {FC} from "react";
+import FaceIcon from '@material-ui/icons/Face';
+import TextFormatIcon from '@material-ui/icons/TextFormat';
+import StorageIcon from '@material-ui/icons/Storage';
 
 const useStyles = makeStyles(theme => ({
     info: {
@@ -37,7 +40,7 @@ export const Profile: FC<ProfilePropsTypes> = ({profile, status, updateUserStatu
 
     return (
         <Grid container>
-            <Grid item sm={5} xs={12} >
+            <Grid item sm={6} xs={12} >
                 <Paper className={classes.info}>
                     <ProfileInfo profile={profile} status={status} updateUserStatus={updateUserStatus} isOwner={isOwner}
                                  savePhoto={savePhoto}
@@ -45,17 +48,33 @@ export const Profile: FC<ProfilePropsTypes> = ({profile, status, updateUserStatu
                     />
                 </Paper>
             </Grid>
-            <Grid item sm={7} xs={12}>
+            <Grid item sm={6} xs={12}>
                 <Paper className={classes.root}>
                     <Typography variant={"h6"}>
-                        Чат реализован с помощью WebSocket. Вы можете продублировать вкладку сайта и пообщаться с самим
-                        собой &#128512;
+                        После авторизации, вы можете изменить:
+                        <List>
+                            <ListItem>
+                                <ListItemIcon>
+                                    <FaceIcon/>
+                                </ListItemIcon>
+                                <ListItemText>Аватарку</ListItemText>
+                            </ListItem>
+                            <ListItem>
+                                <ListItemIcon>
+                                    <TextFormatIcon/>
+                                </ListItemIcon>
+                                <ListItemText>Статус (дважды кликнув на него, либо на заголовок)</ListItemText>
+                            </ListItem>
+                            <ListItem>
+                                <ListItemIcon>
+                                    <StorageIcon/>
+                                </ListItemIcon>
+                                <ListItemText>Личные данные и контакты</ListItemText>
+                            </ListItem>
+                        </List>
                     </Typography>
                 </Paper>
             </Grid>
-{/*            <Grid item className={classes.paper}>
-                <MyPostsContainer/>
-            </Grid>*/}
         </Grid>
     );
 };

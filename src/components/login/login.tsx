@@ -37,14 +37,14 @@ export const Login: FC<LoginType> = ({errorMessage, onSubmit, captchaUrl}) => {
             <Dialog open={open} onClose={handleClose} aria-labelledby="form-dialog-title">
                 <DialogTitle id="form-dialog-title">Login</DialogTitle>
                 <DialogContent>
-                    <Typography variant={"subtitle1"}>Please use test email: </Typography>
-                    <Typography variant={"h4"}>free@samuraijs.com</Typography>
-                    <Typography variant={"subtitle1"}>Please use test password: </Typography>
-                    <Typography variant={"h4"}>free</Typography>
+                    <Typography variant={"subtitle1"}>Please use my email: </Typography>
+                    <Typography variant={"h4"}>grigory.yakovlev96@gmail.com</Typography>
+                    <Typography variant={"subtitle1"}>Please use my password: </Typography>
+                    <Typography variant={"h4"}>f4f2d23a</Typography>
                     <Formik
                         initialValues={{
-                            email: "free@samuraijs.com",
-                            password: "free",
+                            email: "grigory.yakovlev96@gmail.com",
+                            password: "f4f2d23a",
                             rememberMe: false,
                             captcha: undefined as string | undefined,
                         }}
