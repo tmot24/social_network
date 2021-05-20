@@ -30,8 +30,8 @@ export const SimpleBackdrop: FC<{ profile: ProfileType, saveProfile: (profile: P
 
     return (
         <>
-            <Button variant="contained" onClick={handleToggle}>
-                Edit
+            <Button fullWidth variant="contained" onClick={handleToggle}>
+                Edit profile info
             </Button>
             <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
                 <ProfileDataForm profile={profile} saveProfile={saveProfile} handleToggle={handleToggle}/>

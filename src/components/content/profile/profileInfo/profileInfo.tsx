@@ -3,7 +3,7 @@ import {ProfileStatus} from "./profileStatus"
 import avatar from "../../../../assets/images/avatar.svg"
 import {ChangeEvent, FC, useState} from "react"
 import {ProfileDataForm} from "./profileDataForm"
-import {Grid, Typography} from "@material-ui/core"
+import {Box, Grid, Input, Typography} from "@material-ui/core"
 import {ProfileType} from "../../../../types/typs"
 import {Contacts} from "./contacts"
 import {makeStyles, useTheme} from "@material-ui/core/styles"
@@ -62,10 +62,15 @@ export const ProfileInfo: FC<ProfileInfoTypes> = ({
             <Grid item>
                 <Typography className={classes.title} variant={"h5"}>Contacts</Typography>
                 <Contacts profile={profile}/>
-                {isOwner && <input type={"file"} onChange={mainPhotoSelected}/>}
-                {isOwner && <button>edit</button>}
-                <br/>
-                <SimpleBackdrop profile={profile} saveProfile={saveProfile}/>
+                {isOwner && <>
+                    <Box margin={1} display={"flex"} flexDirection={"column"} justifyContent={"center"}>
+                        <Typography align={"center"}>Change avatar</Typography>
+                        <Input type={"file"} onChange={mainPhotoSelected}/>
+                    </Box>
+                    <Box margin={1} display={"flex"} justifyContent={"center"}>
+                        <SimpleBackdrop profile={profile} saveProfile={saveProfile}/>
+                    </Box>
+                </>}
             </Grid>
         </Grid>
     )
