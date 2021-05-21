@@ -1,14 +1,13 @@
-import {Preloader} from "../../common/preloader/preloader"
-import {ProfileStatus} from "./profileStatus"
-import avatar from "../../../../assets/images/avatar.svg"
-import {ChangeEvent, FC, useState} from "react"
-import {ProfileDataForm} from "./profileDataForm"
-import {Box, Grid, Input, Typography} from "@material-ui/core"
-import {ProfileType} from "../../../../types/typs"
-import {Contacts} from "./contacts"
-import {makeStyles, useTheme} from "@material-ui/core/styles"
-import {ProfileData} from "./profileData"
-import {SimpleBackdrop} from "./editProfileInfo/editProfileInfo"
+import { Preloader } from "../../common/preloader/preloader";
+import { ProfileStatus } from "./profileStatus";
+import avatar from "../../../../assets/images/avatar.svg";
+import { ChangeEvent, FC } from "react";
+import { Box, Grid, Input, Typography } from "@material-ui/core";
+import { ProfileType } from "../../../../types/typs";
+import { Contacts } from "./contacts";
+import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { ProfileData } from "./profileData";
+import { SimpleBackdrop } from "./editProfileInfo/editProfileInfo";
 
 type ProfileInfoTypes = {
     profile: ProfileType

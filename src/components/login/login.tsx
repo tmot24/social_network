@@ -38,9 +38,9 @@ export const Login: FC<LoginType> = ({errorMessage, onSubmit, captchaUrl}) => {
                 <DialogTitle id="form-dialog-title">Login</DialogTitle>
                 <DialogContent>
                     <Typography variant={"subtitle1"}>Please use my email: </Typography>
-                    <Typography variant={"h4"}>grigory.yakovlev96@gmail.com</Typography>
+                    <Typography variant={"h5"}>grigory.yakovlev96@gmail.com</Typography>
                     <Typography variant={"subtitle1"}>Please use my password: </Typography>
-                    <Typography variant={"h4"}>f4f2d23a</Typography>
+                    <Typography variant={"h5"}>f4f2d23a</Typography>
                     <Formik
                         initialValues={{
                             email: "grigory.yakovlev96@gmail.com",
@@ -65,6 +65,7 @@ export const Login: FC<LoginType> = ({errorMessage, onSubmit, captchaUrl}) => {
                             <Box margin={1}>
                                 <Field
                                     component={TextField}
+                                    fullWidth
                                     name={"email"}
                                     type={"email"}
                                     label={"Email"}
@@ -74,6 +75,7 @@ export const Login: FC<LoginType> = ({errorMessage, onSubmit, captchaUrl}) => {
                             <Box margin={1}>
                                 <Field
                                     component={TextField}
+                                    fullWidth
                                     type="password"
                                     label="Password"
                                     name="password"
